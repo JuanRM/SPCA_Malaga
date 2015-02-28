@@ -1,0 +1,61 @@
+<!--################################################
+  # Muestra los informes guardados para las semanas anteriores (10 semanas)
+  #    informeAnteriores -> 
+  #    -> editar informe
+#################################################-->
+
+<h1> Informes Semana</h1>
+</br>
+</br>
+</br>
+
+
+<% if @diarios.first.nil?%>
+   <%="No hay informes guardados para semanas anteriores en esta zona"%>
+   </br>
+   </br>
+<%else%>
+
+<p>
+<b><%= @diarios.first.zona.nombre %></b>
+</p>
+
+
+<% @diarios.each do |diario| %>
+
+ 
+  <% if ((@persona.ocupacion_id==1 && @persona.zona_id==diario.zona_id) || (@persona.ocupacion_id==3 && @persona.zona_id==diario.zona_id)) %>
+    <p>
+    <nav class="botonera2">
+       <a href="/editar_informeAnterior?id=<%=diario.id%>" class="boton2verdeder enlaceb">Editar informe</a>
+    </nav>
+    </p>
+  <% end %>
+
+  </br>
+  <div class="roundB">
+
+    <p><jj><%= link_to diario.fecha.strftime("%d-%m-%Y")+" i", diario %></jj>
+    <%= diario.fecha.wday %></p>
+<!-- cambiar a informe mañana -->
+    <ul>
+    <p>
+    <b>Informe Semanal:</b>
+    <% if diario.informe.nil? || diario.informe.empty? %>
+	<%= simple_format h diario.informe %>
+    <% else %>
+        <%= markdown diario.informe %>
+    <% end %>
+    </p>
+    </ul>
+    </br>
+  </div>
+  </br>
+
+<%end%>
+<%end%>
+
+<p>
+<%= link_to 'Horarios', {:action=> "vistahorario"} %>
+</p>
+

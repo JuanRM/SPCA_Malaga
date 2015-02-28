@@ -1,0 +1,49 @@
+<!--#####################################
+# recoge datos para "new" y "edit"
+#  new->
+#  edit->
+#####################################-->
+
+
+<h1></h1>
+
+<%= form_for(@zona) do |f| %>
+  <% if @zona.errors.any? %>
+    <div id="error_explanation">
+      <% flash[:error] = "Chenil no pudo ser creado correctamente" %>
+      <ul>
+      <% @zona.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+</br>
+
+
+<% if @zona.id!=1 && @zona.id!=11 %>
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  </br>
+<%end%>
+
+  <div class="field">
+    <%= f.label :Notas %><br />
+    <%= f.text_area :notas %>
+  </div>
+  </br>
+
+  <div class="field">
+    <%= f.label :Informacion %><br />
+    <%= f.text_area :text %>
+  </div>
+  </br>
+  </br>
+
+  <div class="actions">
+    <%= f.submit "Guardar Zona" %>
+  </div>
+
+<% end %>

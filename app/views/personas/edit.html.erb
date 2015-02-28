@@ -1,0 +1,97 @@
+<!--#####################################
+# Edita información de una persona
+#  - coord/vet/administrador (info privada)
+#  - propio usuario (info publica)
+#  show->
+#######################################-->
+
+<h1>Editar Persona</h1>
+<hr/>
+
+
+<table class="tabla">
+  <tr class="letragrande">
+
+    <td><p>
+      <b>Nombre:</b>
+      <%= @persona.nombre %>
+    </td></p>
+
+
+    <td><p>
+      <b>Email:</b>
+      <%= @persona.email %>
+    </td></p>
+  </tr>
+
+  <tr class="letragrande">
+    <td><p>
+      <b>Zona:</b>
+      <%= @persona.zona.nombre %>
+    </td></p>
+  </tr>
+
+</table>
+
+<div class="roundB">
+  <ul>
+  <p>
+    <b>Información pública:</b>
+    <%= simple_format h @persona.publico %>
+  </p>
+  </ul>
+</div>
+<hr/>
+
+<%= form_for(@persona) do |f| %>
+  <% if @persona.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@persona.errors.count, "error") %> prohibited this persona from being edited:</h2>
+
+      <ul>
+      <% @persona.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+</br>
+
+  <b>Información:</b>
+
+<hr>
+
+<!--solo la propia persona puede editar su información pública-->
+<% if current_persona.id == @persona.id %>
+  <div class="field">
+    <%= f.label :"editar información pública: " %><br/>
+    <%= f.text_area :publico %>
+  </div>
+<% end %>
+</br>
+
+<!--solo el administrador, coordinadores y veterinarios pueden ver y editar la información
+privada de los demas perfiles-->
+<% if current_persona.ocupacion_id == 1 || current_persona.ocupacion_id==3 || current_persona.ocupacion_id==7 %>
+  <div class="field">
+    <%= f.label :"editar información privada: " %><br/>
+    <%= f.text_area :privado %>
+  </div>
+<% end %>
+
+</br>
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+     <%= link_to 'Ficha', @persona %> |
+     <%= link_to 'Listado', personas_path %>
+  </span>
+</nav>
+
+<%end%>

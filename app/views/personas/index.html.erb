@@ -1,0 +1,105 @@
+<!--#####################################
+# Listado de personas existentes
+# menu-> 
+# -> "show" ficha
+# -> "new"
+######################################-->
+
+
+<h1>Listado personas</h1>
+
+<% if current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3 || current_persona.ocupacion_id == 7 %>
+
+  <nav class="botonera2">
+    <a href="personas/new" class="boton2verde enlaceb">Crear persona nueva</a>
+  </nav>
+  </p>  
+
+<% end %>  
+<hr/>
+
+<!-- @guardian %-->
+
+<center>
+<table class="tabla">
+
+<td width="50%"> 
+ <select onchange="window.location.href = this.value">
+    <option value="">Zona</option>
+      <% if @ocupacion.nil? %>
+         <option value="/personas"><%="Todas"%></option>
+        <% @zonas.each do |zona| %>
+         <option value="/personas?zona=<%=zona.id%>"><%=zona.nombre%></option>
+        <% end %>
+      <% else %>
+        <option value="/personas?ocupacion=<%=@ocupacion.id%>"><%="Todas"%></option>
+        <% @zonas.each do |zona| %>
+         <option value="/personas?zona=<%=zona.id%>&ocupacion=<%=@ocupacion.id%>"><%=zona.nombre%></option>
+        <%end%>
+      <% end %>
+ </select>
+</td>
+
+<td width="50%"> 
+ <select onchange="window.location.href = this.value">
+    <option value="">Ocupación</option>
+    
+      <% if @zona.nil? %>
+        <option value="/personas"><%="Todas"%></option>
+        <% @ocupacions.each do |ocupacion| %>
+          <option value="/personas?ocupacion=<%=ocupacion.id%>"><%=ocupacion.nombre%></option>
+        <%end%>
+
+      <% else %>
+        <option value="/personas?zona=<%=@zona.id%>"><%="Todas"%></option>
+        <% @ocupacions.each do |ocupacion| %>
+         <option value="/personas?zona=<%=@zona.id%>&ocupacion=<%=ocupacion.id%>"><%=ocupacion.nombre%></option>
+        <%end%>
+
+      <% end %>
+
+ </select>
+</td>
+</table>
+</center>
+</br>
+
+<center>
+<table class="tabla">
+<tr>
+<th>Nombre</th>
+<th>Email</th>
+<th>Ocupacion</th>
+<th>Zona</th>
+<th></th>
+</tr>
+<% @personas.each do |persona| %>
+<tr>
+<!--td<%= gravatar_image_tag persona.email, :size => 20 %>
+<td><%= gravatar_for persona, :size => 30 %></td-->
+<td><%= persona.nombre %></td>
+<td><%= persona.email %></td>
+<% if !persona.ocupacion_id.nil? %>
+  <td><%= persona.ocupacion.nombre%></td>
+<% else %>
+  <td><%= "No ocupacion" %></td>
+<%end%>
+
+<% if !persona.zona_id.nil? %> 
+    <td><%= persona.zona.try(:nombre) %></td>
+<% else %>
+  <td><%= "Sin zona" %></td>
+<%end%>
+<td><%= link_to 'Ficha', persona %></td>
+
+
+<!--Elimina personas sin zona-->
+  <% if persona.zona.nil? %>
+      <% persona.destroy %>
+  <% end %>
+
+<% end %>
+</table>
+</center>
+<br />
+

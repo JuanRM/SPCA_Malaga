@@ -1,0 +1,264 @@
+<!--#####################################
+# Mueve un animal (dentro de su zona) 
+#  (de mi zona a zona de libremovimeinto)
+#  show->
+#  -> moverzona
+#######################################-->
+
+<h1>Mover Animal</h1>
+
+
+<!--Repasar condiciones, controlamos en anterior-->
+<!--Si animal zona libremovimiento....moveramizona!!!-->
+<% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3 ) && (@animal.zona_id == current_persona.zona_id || @animal.zona.libremovimiento==1) %> 
+   
+  <nav class="botonera2">
+
+    <a class="boton2verde enlaceb"<%= link_to 'Mover de zona', :action=> "zona_mover", :id=>@animal.id%></a>
+
+  </nav>
+  </br>
+
+<%end%>
+
+
+<table class="tabla">
+ 
+  <tr>
+    <th>Foto</th>
+
+    <th>Nombre</th>
+
+    <th>Relacion</th>
+
+    <th><%= @animal.zona.nombre%></th>
+  </tr>
+
+
+  <tr class="modo1">
+
+    <td>
+    <% if @animal.foto_content_type.nil? %>
+        <%= link_to image_tag('logo.png'), @animal %>
+    <% else %>
+        <%= link_to image_tag(@animal.foto.url(:thumb)), @animal %>
+    <%end%>
+    </td>
+
+
+    <td><%= @animal.nombre %></td>
+
+    <td></td>
+    <td></td>
+    <td></td>
+
+  </tr>
+
+  <hr/>
+
+
+<!--BUSQUEDA NO MINIMIZADA-->
+<!--busqueda animales que estan en el mismo chenil que animal-->
+  <% @animals.each do |animal| %>
+   <% if ((animal.chenil_id == @animal.chenil_id) && (animal.id != @animal.id)) %> 
+
+	  <tr class="modo1">
+
+	    <td>
+	    <% if animal.foto_content_type.nil? %>
+	        <%= link_to image_tag('logo.png'), animal %>
+	    <% else %>
+	        <%= link_to image_tag(animal.foto.url(:thumb)), animal %>
+	    <%end%>
+    	    </td>
+
+
+
+	    <td><%= animal.nombre %></td>
+
+	    <% @cont=0 %>
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @cont=1 %>
+		<% end %>	
+
+	    <%end%>	
+		
+	    <% if @cont!=1 %>
+		  <td><%= 'sin info' %></td>	
+	    <%end%>
+	    <td></td>
+	    <td></td>	
+	</tr>
+	
+   <%end%> 
+  <%end%>
+
+ <% @chenils.each do |chenil| %>
+  <% if (chenil.id == @animal.chenil_id ) %>
+	<tr class="modo3">
+ 	 <th>Chenil
+  	 <%= chenil.numero %></th>
+  	 <th>Capacidad
+  	 <%= chenil.capacidad %></th>
+  	 <th>Espacio
+  	 <%= chenil.caplibre %></th>
+ 	 <th></th>
+ 	</tr>
+  <% end %>
+ <% end %>
+
+<!--Separación entre cheniles-->
+<tr class="modo1">
+  <td></td>
+</tr>
+<tr class="modo1">
+  <td></td>
+</tr>
+
+
+  <tr>
+    <th>Foto</th>
+
+    <th>Nombre</th>
+
+    <th>Relacion</th>
+    <th><%=@zona.nombre%></th>
+
+
+  </tr>
+
+<!--para cada chenil, busca animales-->
+<!--hacerlo por busqedas en sql???-->
+ <% @chenils.each do |chenil| %>
+  <% if chenil.zona_id == @zona.id && chenil.id != @animal.chenil_id %>
+
+   <!--controlar capacidad max chenil-->
+   <% @testeocapacidad=0 %>
+   <% @animals.each do |animal| %>
+     <% if (animal.chenil_id == chenil.id) %> 
+
+          <% @testeocapacidad=@testeocapacidad+1 %>
+	  <tr class="modo1">
+
+	   <td>
+           <% if animal.foto_content_type.nil? %>
+              <%= link_to image_tag('logo.png'), animal %>
+           <% else %>
+              <%= link_to image_tag(animal.foto.url(:thumb)), animal %>
+           <%end%>
+           </td>
+  
+	    <td><%= animal.nombre %></td>
+ 
+	    <% @existe=0 %>
+	    
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @existe=1 %>
+		     
+		     <% if (relacion.relacion=='pelea')%>
+			  <% @contpelea=1 %>
+		     <% end %>	
+		     <% if (relacion.relacion=='regular')%>
+			  <% @contregular=1 %>
+		     <% end %>	
+		     <% if (relacion.relacion=='sin información')%>
+			  <% @continfo=1 %>
+		     <% end %>	
+		     <% if (relacion.relacion=='bien')%>
+			  <% @contbien=1 %>
+		     <% end %>	
+
+	        <%end%>
+	    <%end%>	
+
+	    <% if (@existe!=1) %>
+		<td><%= "sin información" %></td>
+                <% @continfo=1 %>
+	    <%end%>
+
+	    
+	    <td></td>
+	    <td></td>
+	</tr>		
+
+	
+     <%end%> 
+   <%end%>
+
+
+
+
+   <% if (@contpelea==1) %>
+      <% @contfin='pelea' %>			
+   <% else %>
+      <% if (@contregular==1) %>
+	  <% @contfin='regular'  %>
+      <% else %>
+	  <% if (@continfo==1) %>
+		<% @contfin='sin info'%>
+	  <% else %>
+	  	<%if (@contbien==1) %>
+			<% @contfin='bien' %>
+	  	<% else %>
+			<% @contfin='sin animales' %>
+		<%end%>
+	  <%end%>
+      <%end%>
+   <%end%>
+
+
+  <tr class="modo3">
+     <th>Chenil
+     <%= chenil.numero %></th>
+<!--th con borde oscuro a la derecha-->
+     <th>Capacidad
+     <%= chenil.capacidad %></th>
+     <th>Espacio
+     <%= chenil.capacidad-@testeocapacidad %></th>
+<!--th con borde oscuro a la derecha-->
+
+     <th>Rel Chenil:
+
+     <!--controlador capacidad chenil-->
+     <% if @testeocapacidad>=chenil.capacidad %>
+        <%= "Sin espacio" %></th>
+        <th></th>
+     <% else %>
+        <%= @contfin %></th>
+        <th><%= link_to 'mover Animal', :action=> "moverfin", :id1=> @animal.id, :id2 => chenil.id %></th>
+     <% end %>
+
+  
+  </tr>
+
+<!--Separación entre cheniles-->
+<tr class="modo1">
+  <td></td>
+</tr>
+<tr class="modo1">
+  <td></td>
+</tr>
+  
+
+
+<% @contpelea=0 %>
+<% @contregular=0 %>
+<% @continfo=0 %>
+<% @contbien=0 %>
+
+ <%end%>
+
+<%end%>
+
+</table>
+
+</br></br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Atras', @animal %>
+  </span>
+</nav>

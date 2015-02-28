@@ -1,0 +1,70 @@
+<!--#####################################
+ # Crea relación nueva
+ #   ->relacionesXanimal
+######################################-->
+
+<h1>Crear relación</h1>
+<hr/>
+</br>
+
+
+
+
+
+<%= form_for(@relacion_animal) do |f| %>
+  <% if @relacion_animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relacion_animal.errors.count, "error") %> prohibited this relacion_animal from being saved:</h2>
+
+      <ul>
+      <% @relacion_animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ 
+
+<!--necesario para meter animal1 en relación-->
+  <b><%= "Animal: "%></b></br>
+  <div>
+  <select name="relacion_animal[animal1_id]"> 
+     <option value="<%= @animal.id %>" 
+        <% 'selected' if @animal.id == @animal.id %>> 
+        <%= @animal.nombre %> 
+     </option> 
+  </select></div>
+  </br>
+
+
+  <b><%= "Compañero zona: "  %></b></br>
+  <div>
+  <select name="relacion_animal[animal2_id]"> 
+   <% @animals.each do |animal| %> 
+       <option value="<%= animal.id %>" 
+         <%= 'selected' if animal.chenil.zona_id == @animal.chenil.zona.id %>>
+         <%= animal.nombre %> 
+       </option> 
+   <%end%>
+  </select></div> 
+  </br>
+
+  <b><%= "Relación: "  %></b></br>
+  <div class="field">
+     <%= f.select :relacion, ["", "pelea","regular", "sin información", "bien"] %>
+  </div>
+
+  </br>
+  <div class="actions">
+    <%= f.submit "Crear relacion" %>
+  </div>
+  </br>
+
+  <nav class="links_bajo">
+    <span style="float:right">  
+       <a href="/relacionesXanimal/<%=@animal.id%>">Atras</a>
+    </span>
+  </nav>
+
+<%end%>

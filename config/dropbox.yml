@@ -1,0 +1,15 @@
+#configurarion dropbox
+#app_key: "1rxcia77mbabyku"
+#app_secret: "t3ll7zpswzbcmqo"
+#your_consumer_key: "1rxcia77mbabyku"
+#your_consumer_secret: "t3ll7zpswzbcmqo"
+#backup_path: '/Public/Backups/ <- folder inside dropbox'
+#heroku_app_name: 'heroku-application-name'
+
+app_key: "yvq7ku3kzdjyjs8"
+app_secret: "z080bdwkempegnf"
+access_token: "611snncio2zxfsh"
+access_token_secret: "x4aavqmy5hvlrfs"
+user_id: "182718352"
+
+access_type: app_folder

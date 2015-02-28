@@ -1,0 +1,66 @@
+<!--#####################################
+# Administración zonas existentes 
+#   !solo administrador
+#   -> crear zona nueva
+#   -> eliminar zona
+    #####################################-->
+
+<h1>Administracion Zonas</h1>
+
+
+<% if current_persona.ocupacion_id == 7 %>
+  <nav class="botonera2">
+    <a href="zonas/new" class="boton2verde enlaceb">Crear Zona Nueva</a>
+  </nav>
+  </p>
+<% end %>
+
+<hr/>
+
+<center>
+<table class="tabla">
+  <tr>
+    <th>Nombre</th>
+    <th>Administracion</th>
+  </tr>
+
+<!--deja fuera zonas: veterinario, externo, limpiadores, intercambio-->
+<% @zonas.each do |zona| %>
+  <% if zona.id >2 && zona.id != 11 && zona.id !=14 %>
+  <tr>
+    <td><%= zona.nombre %></td>
+
+    <% if current_persona.ocupacion_id == 7 %>
+       <!--Si tiene animales en su interior-->
+       <% @animalenzona = Animal.find(:first, :conditions => ["zona_id = ?", zona.id]) %>
+       <% if !@animalenzona.nil? %>
+          <td><%= link_to 'Eliminar', zona, confirm: 'La zona debe estar vacia de animales para poder ser eliminida, ¿Esta seguro de querer eliminar esta zona?', method: :delete %></td>
+       <!--Si no tiene animales en su interior-->
+       <% else %>
+          <td><%= link_to 'Eliminar', zona, confirm: 'Se eliminaran automaticamente el personal, turnos y diarios asignados a esta zona, ¿Esta seguro de querer eliminar esta zona?', method: :delete %></td>
+       <% end %>
+       <!--este tr???-->
+       </tr>
+    <% end %>
+
+  </tr>
+  <%end%>
+<% end %>
+
+<% @zonas.each do |zona| %>
+  <% if (zona.id<=2 || zona.id==14) && zona.id !=11 %>
+  <tr>
+    <td><%= zona.nombre %></td>
+
+    <td></td>
+  </tr>
+
+
+  </tr>
+  <%end%>
+<% end %>
+</table>
+</center>
+<br />
+
+

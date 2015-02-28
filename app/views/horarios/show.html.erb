@@ -1,0 +1,44 @@
+<!--#####################################
+# Muestra la ficha de un animal
+#   vistahorario/index->
+#   -> borrar turno (delete)
+#######################################-->
+
+
+<h1>Turno</h1>
+
+<p id="notice"><%= notice %></p>
+<hr/>
+
+
+<p>
+  <b>Usuario:</b>
+  <%= @horario.persona.nombre %>
+</p>
+
+<p>
+  <b>Zona:</b>
+  <%= @horario.zona.nombre %>
+</p>
+
+<p>
+  <b>Fecha:</b>
+  <%= @horario.fecha.strftime("%d-%m-%Y") %>
+</p>
+
+<p>
+  <b>Tarde:</b>
+  <% if @horario.tarde==0 %>
+     <%= "Mañana" %>
+  <% else %>
+     <%="Tarde"%>
+  <% end %>
+</p>
+
+<% if (@horario.persona.id == current_persona.id || ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3) && current_persona.zona_id==@horario.zona_id)) && @horario.fecha>=@hoy+1 %>
+	<%= link_to 'Borrar turno', @horario, confirm: 'Desea borrar este turno?', method: :delete %>
+        |
+<%end%>
+
+<%= link_to 'Atras', {:action=> "vistahorario"} %>
+

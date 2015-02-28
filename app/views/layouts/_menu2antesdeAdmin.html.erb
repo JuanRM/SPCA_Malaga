@@ -1,0 +1,27 @@
+<menu>
+
+<nav class="main_header">
+
+   <ul class="main-menu">
+
+
+	 <!--li>< link_to "Inicio", home_path %></li-->
+	 <li><%= link_to "ZONAS", zonas_path %></li>
+	 <li><%= link_to "ANIMALES", animals_path %></li>
+	<% if signed_in? %>
+
+	  <!--li>< link_to "Cheniles", chenils_path %></li-->
+	 
+	  <!--li>< link_to "Relación Animales", relacion_animals_path ></li-->
+	  <li><%= link_to "PERSONAL", personas_path %></li>
+	  <li><%= link_to "HORARIOS", {:controller=> "horarios", :action=>"vistahorario" } %></li>
+	<!--< if signed_in? %> -->
+	  <li><%= link_to "SALIR", signout_path, :method => :delete %></li>
+	<% else %>
+	  <li><%= link_to "SIGN IN", signin_path %></li>
+	<% end %>
+   </ul>
+
+</nav>
+</menu>
+

@@ -1,0 +1,68 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
+<!--#####################################
+  # Edita los informes de un dia
+  #   show ->
+  #   -> show 
+#######################################-->
+
+<h1>Editar día</h1>
+<hr/>
+
+
+<table class="tabla">
+ <tr class="letragrande">
+  <td><p>
+    <b>Zona:</b>
+    <%= @diario.zona.nombre %>
+  </p></td>
+
+  <td><p>
+    <b>Fecha:</b>
+    <%= @diario.fecha.strftime("%d-%m-%Y") %>
+  </p></td>
+ </tr>
+</table>
+
+
+<%= form_for(@diario) do |f| %>
+  <% if @diario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@diario.errors.count, "error") %> prohibited this diario from being saved:</h2>
+
+      <ul>
+      <% @diario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ 
+  <div class="field">
+    <%= f.label :"informe mañana" %>
+    <%= f.text_area :informe, :style => "width:100%" %>
+  </div>
+  </br>
+  
+  <% if @diario.unificado!=1 %>
+    <div class="field">
+      <%= f.label :"informe tarde" %>
+      <%= f.text_area :informet, :style => "width:100%" %>
+    </div>
+  <% end %>
+  </br></br>
+
+  <div class="actions">
+    <%= f.submit "Guardar Diario" %>
+  </div>
+<% end %>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+      <%= link_to 'Atras', @diario %>
+  </span>
+</nav>
+

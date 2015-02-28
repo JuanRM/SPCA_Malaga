@@ -1,0 +1,20 @@
+
+
+<%= form_for(@relacion_animal) do |f| %>
+  <% if @relacion_animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relacion_animal.errors.count, "error") %> prohibited this relacion_animal from being saved:</h2>
+
+      <ul>
+      <% @relacion_animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+<% end %>
+

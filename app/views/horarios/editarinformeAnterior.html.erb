@@ -1,0 +1,48 @@
+<!--#################################################
+  # Permite la edición de un informe unificado
+  #    informeAnteriores -> 
+  #    -> editar informe
+##################################################-->
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
+<h1>Editar Informe</h1>
+<hr/>
+
+<p>
+  <b>Zona:</b>
+  <%= @diario.zona.nombre %>
+</p>
+
+<p>
+  <b>Semana:</b>
+  <%= @diario.fecha %>
+</p>
+
+
+<%= form_for(@diario) do |f| %>
+  <% if @diario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@diario.errors.count, "error") %> prohibited this zona from being saved:</h2>
+
+      <ul>
+      <% @diario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <ul>
+  <div class="field">
+    <div>
+    <%= f.label :"Informe" %><br />
+    <%= f.text_area :informe %>
+    </div>
+  </div>
+ </ul>
+
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>

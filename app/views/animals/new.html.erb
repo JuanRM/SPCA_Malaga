@@ -1,0 +1,113 @@
+<!--#####################################
+# Crea animal nuevo
+#  index ->
+#  -> show
+######################################-->
+
+<h1>Nuevo animal</h1>
+<hr/>
+</br>
+
+
+<!--Controlar cheniles zona con caplibre>0---------------->
+<!-- @chenils=Chenil.where("chenils.zona_id = ? AND caplibre > ?", @zona, 0) %--> 
+<% if @chenils.empty?%>
+    </br>
+    <%= "-No hay cheniles con capacidad libre en su zona" %></br>
+    <%= "-Cree un chenil nuevo con capacidad antes de crear un animal"%>
+    </br>
+    </br>
+    </br>
+
+<% else %>
+  <%= form_for(@animal, :html => {:multipart=>true}) do |f| %>
+    <% if @animal.errors.any? %>
+      <div id="error_explanation">
+        <% flash[:error] = "Animal nuevo no pudo ser creado correctamente" %>
+        <ul>
+        <% @animal.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+
+    <div class="field">
+	<%= f.label :nombre %><br />
+	<%= f.text_field :nombre %>
+    </div>
+
+
+    <%= f.label :epecie %><br />  
+    <select name="animal[especie_id]"> 
+     <% @especies.each do |especie| %> 
+         <option value="<%= especie.id %>" 
+           <%= 'selected' if especie.id == @animal.especie_id %>>
+           <%= especie.nombre %> 
+         </option> 
+     <% end %> 
+    </select>
+    <%= link_to " - Añadir Especie nueva", especies_path %>
+  
+
+    <div class="field">
+	<%= f.label :raza %><br />
+	<%= f.text_field :raza %>
+        <% @aux=:raza %>
+    </div>
+
+
+    <div class="field">
+       <%= f.label :Sexo %><br />
+       <%= f.select :sexo, ["neutro", "macho", "hembra"] %>
+    </div>
+ 
+
+    <div>
+      <%= f.label :Chenil %><br />
+      <select name="animal[chenil_id]"> 
+      <% @chenils.each do |chenil| %> 
+        <option value="<%= chenil.id %>" 
+          <%= 'selected' if chenil.id == @animal.chenil_id %>>
+          <%= chenil.numero %> 
+        </option> 
+
+        <% @animal.zona_id=chenil.zona_id %>	
+
+      <% end %> 
+      </select>
+
+      <%= " - " %>
+      <%= @zona.nombre %>
+    </div>
+
+
+    <div class="field">
+	<%= f.label :Foto %><br/>
+  	<%= f.file_field :foto %>
+    </div> 
+    </br>
+
+    <div class="field">
+	<%= f.label :Observaciones %><br/>
+  	<%= f.text_area :observaciones %>
+    </div> 
+    </br>
+
+
+    <div class="actions">
+       <%= f.submit "Guardar nuevo" %>
+    </div>
+    </br>
+
+  <% end %>
+
+<%end%>
+
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Atras', animals_path %>
+  </span>
+</nav>

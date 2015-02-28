@@ -1,0 +1,103 @@
+<!--#####################################
+# Crea una persona nueva
+#   - administrador : todos las ocupaciones
+#   - coord/vet: voluntarios y auxiliares en su zona
+#   index->
+#####################################-->
+
+<h1>Nueva persona</h1>
+
+<hr/>
+
+
+<% if @ocupacion == 1 || @ocupacion == 3 %>
+
+<table class="tabla">  
+
+  <td>
+  <p>
+  <b>Zona:</b>
+  </br>
+  <b><%= @zona %></b>
+  </p>
+  </td>
+
+  <td>
+  <b>Ocupacion:</b></br>
+
+  <% if @ocupacion==1 %>
+    <p>
+       <b><%= "Voluntario" %></b>
+    </p>
+  <% else %>
+    <p>
+      <b><%= "Auxiliar de Veterinario" %></b>
+    </p>
+  <% end %>
+  </td>
+
+</table>
+
+<% end %>
+
+
+<%= form_for(@persona) do |f| %>
+  <%= render 'shared/error_messages' %>
+
+  <div class="field">
+	<%= f.label :nombre %><br />
+	<%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+	<%= f.label :email %><br />
+	<%= f.text_field :email %>
+  </div>
+
+
+<!--Si current_persona es ADMINISTRADOR UNICO QUE CREA: coordinador, veterinario o limpiadores y elige zona(irrelevante para limpiadores)-->
+<!------------------------------------------------------------------------------->
+
+  </br>
+  <% if current_persona.ocupacion_id == 7 %>
+    <div>
+    <select name="persona[ocupacion_id]"> 
+     <% @ocupacions.each do |ocupacion| %> 
+       <% if ocupacion.id == 1 || ocupacion.id==3 || ocupacion.id==4 %> 
+         <option value="<%= ocupacion.id %>" 
+           <%= 'selected' if ocupacion.id == @persona.ocupacion_id %>>
+           <%= ocupacion.nombre %> 
+         </option> 
+       <% end %> 
+     <% end %> 
+    </select></div>
+
+
+    <div>
+    <select name="persona[zona_id]"> 
+     <% @zonas.each do |zona| %> 
+       <option value="<%= zona.id %>" 
+         <%= 'selected' if zona.id == @persona.zona_id %>>
+         <%= zona.nombre %> 
+       </option> 
+     <% end %> 
+    </select></div>
+    </br>   
+
+  <% end %> 
+<!-------------------------------------------------------------------------------->
+
+  <div class="field">
+	<%= f.label :password %><br />
+	<%= f.password_field :password %>
+  </div>
+  <div class="field">
+	<%= f.label :password_confirmation, "Confirmación password" %><br />
+	<%= f.password_field :password_confirmation %>
+  </div>
+</br>
+  <div class="actions">
+	<%= f.submit "Crear persona" %>
+  </div>
+
+<% end %>
+

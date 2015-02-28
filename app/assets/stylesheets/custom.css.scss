@@ -1,0 +1,970 @@
+@charset "UTF-8";
+/*servidor local CAMBIA*/
+/*aqui es donde se precompila? desde donde?*/
+/* line 5, ../../app/assets/stylesheets/custom.css.scss */
+/* line 5, ../../app/assets/stylesheets/custom.css.scss */
+.container {
+  position: relative;
+  min-height: 300px;
+  valign: center;
+  width: 960px;
+  background-color: white;
+  padding: 15px;
+  margin-top: 120px;
+  padding-top: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 3em;
+}
+
+/* line 6, ../../app/assets/stylesheets/custom.css.scss */
+/* line 21, ../../app/assets/stylesheets/custom.css.scss */
+body {
+  background: #c9d690;
+}
+
+/* line 7, ../../app/assets/stylesheets/custom.css.scss */
+/* line 26, ../../app/assets/stylesheets/custom.css.scss */
+header {
+  background: #000000;
+  /*white;*/
+  /*margin: 0 auto*/
+  height: 50px;
+  /*padding: 10px;*/
+  width: 100%;
+  min-width: 800px;
+  /*border: solid 1px black;*/
+  /*-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;*/
+}
+
+/* line 37, ../../app/assets/stylesheets/custom.css.scss */
+footer {
+  background: #c9d690;
+  /*#808080;white;*/
+  /*margin: 0 auto*/
+  height: 3em;
+  /*padding: 10px;*/
+  width: 100%;
+  min-width: 800px;
+  /*margin-top:3em;*/
+  bottom: -25;
+  text-align: center;
+  float: bottom;
+  border-top: 3px dotted #65b54c;
+  /*#8888AA;*/
+  /*position: absolute;*/
+  bottom: 0;
+}
+
+/*border: solid 1px black;*/
+/*-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;*/
+/* line 57, ../../app/assets/stylesheets/custom.css.scss */
+.ejemplo {
+  font-size: 1.0em;
+  position: relative;
+  top: 0.7em;
+  font-style: italic;
+}
+
+/* line 18, ../../app/assets/stylesheets/custom.css.scss */
+/* line 65, ../../app/assets/stylesheets/custom.css.scss */
+#imalogo {
+  float: left;
+  height: 100px;
+  width: 80px;
+  background: green;
+}
+
+/* line 24, ../../app/assets/stylesheets/custom.css.scss */
+/* line 73, ../../app/assets/stylesheets/custom.css.scss */
+nav.imalogo {
+  /*float:left;*/
+  padding-top: 10px;
+  width: 100%;
+  height: 230px;
+  background: green;
+  text-align: center;
+  valign: center;
+}
+
+/*.nav-header {
+  display: block;
+  padding: 3px 15px;*/
+  /*font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #999999;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}*/
+/* line 43, ../../app/assets/stylesheets/custom.css.scss */
+/* line 94, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header {
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  /* overflow-x: hidden;
+   overflow-y: hidden;*/
+  /* margin-left: 600px;*/
+  /* height: 40px;*/
+  /*margin: 250 auto;*/
+  width: 100%;
+  /*750px;*/
+  /*border: solid 1px black;*/
+  background: #65b54c;
+  /*#028434;#6fbf4b; #8cb801;*/
+  /*-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  float:bottom;*/
+}
+
+/* line 110, ../../app/assets/stylesheets/custom.css.scss */
+nav.navdias {
+  margin-right: 10px;
+  float: right;
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  width: 30%;
+  background: #65b54c;
+}
+
+/* line 174, ../../app/assets/stylesheets/custom.css.scss */
+/* line 58, ../../app/assets/stylesheets/custom.css.scss */
+/* line 120, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu, nav.navdias ul.main-menu {
+  clear: left;
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  /*overflow-x: hidden;
+  overflow-y: hidden;*/
+  /* margin-left: 600px;*/
+  height: 40px;
+  /*float: top;*/
+  width: 100%;
+  /*720px;*/
+}
+
+/* line 186, ../../app/assets/stylesheets/custom.css.scss */
+/* line 72, ../../app/assets/stylesheets/custom.css.scss */
+/* line 134, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li, nav.navdias ul.main-menu li, nav.navdias ul.main-menu li, nav.navdias ul.main-menu li {
+  display: inline;
+  float: left;
+  font-size: 13px;
+  line-height: 28px;
+  margin-right: 0px;
+  list-style-type: none;
+  text-align: center;
+}
+
+/* line 195, ../../app/assets/stylesheets/custom.css.scss */
+/* line 85, ../../app/assets/stylesheets/custom.css.scss */
+/* line 146, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li.active, nav.main_header ul.main-menu li.active:hover, nav.navdias ul.main-menu li.active, nav.navdias ul.main-menu li.active:hover {
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: #1E1E1E;
+  background-image: none;
+  background-origin: padding-box;
+  /*background-position: 0 0;*/
+  background-repeat: repeat;
+  background-size: auto auto;
+}
+
+/* line 205, ../../app/assets/stylesheets/custom.css.scss */
+/* line 97, ../../app/assets/stylesheets/custom.css.scss */
+/* line 159, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li.active a, nav.main_header ul.main-menu li.active:hover a {
+  color: #FFFFFF;
+}
+
+/* line 162, ../../app/assets/stylesheets/custom.css.scss */
+nav.navdias ul.main-menu li.active a, nav.navdias ul.main-menu li.active:hover a {
+  color: #FFFFFF;
+}
+
+/* line 208, ../../app/assets/stylesheets/custom.css.scss */
+/* line 102, ../../app/assets/stylesheets/custom.css.scss */
+/* line 168, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li:hover, nav.navdias ul.main-menu li:hover {
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgba(31, 31, 31, 0.4);
+  background-image: none;
+  background-origin: padding-box;
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: auto auto;
+  color: #FFFFFF;
+}
+
+/* line 219, ../../app/assets/stylesheets/custom.css.scss */
+/* line 115, ../../app/assets/stylesheets/custom.css.scss */
+/* line 182, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li a, nav.navdias ul.main-menu li a {
+  color: #F7F7F7;
+  display: block;
+  font-weight: 900;
+  padding-bottom: 2px;
+  padding-left: 27px;
+  padding-right: 7px;
+  padding-top: 2px;
+  text-align: center;
+}
+
+/* line 228, ../../app/assets/stylesheets/custom.css.scss */
+/* line 127, ../../app/assets/stylesheets/custom.css.scss */
+/* line 195, ../../app/assets/stylesheets/custom.css.scss */
+nav.main_header ul.main-menu li a.kedomilink {
+  color: #FFff66;
+}
+
+/*header{padding-top:20px}*/
+/* line 131, ../../app/assets/stylesheets/custom.css.scss */
+/* line 201, ../../app/assets/stylesheets/custom.css.scss */
+.roundB {
+  border: 1px solid #65b54c;
+  padding: 15px;
+}
+
+/* line 132, ../../app/assets/stylesheets/custom.css.scss */
+/* line 207, ../../app/assets/stylesheets/custom.css.scss */
+body {
+  background-color: #FFF;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+}
+
+/*header img{padding:1em;background:#fff}*/
+/* line 134, ../../app/assets/stylesheets/custom.css.scss */
+/* line 215, ../../app/assets/stylesheets/custom.css.scss */
+section {
+  /*margin-top:1em;*/
+  font-size: 120%;
+  padding: 20px;
+  background: #fff;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 223, ../../app/assets/stylesheets/custom.css.scss */
+section h1 {
+  font-size: 200%;
+  width: 40%;
+  float: left;
+}
+
+/* line 230, ../../app/assets/stylesheets/custom.css.scss */
+section h4 {
+  font-size: 200%;
+  width: 28%;
+  float: left;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 238, ../../app/assets/stylesheets/custom.css.scss */
+h2 {
+  font-size: 200%;
+  color: #f0ffff;
+  padding-left: 10px;
+}
+
+/* line 243, ../../app/assets/stylesheets/custom.css.scss */
+h3 {
+  font-size: 150%;
+  color: #000000;
+  padding-left: 10px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 250, ../../app/assets/stylesheets/custom.css.scss */
+#moveanimal {
+  background: transparent url(../images/bgfieldset.jpg) no-repeat scroll left bottom;
+  border: medium none;
+  color: #333333;
+  height: 665px;
+  padding: 0 0 0 50px;
+  width: 515px;
+}
+
+/* line 259, ../../app/assets/stylesheets/custom.css.scss */
+textarea#diario_nuevoI, textarea#diario_nuevo, textarea#diario_informe, textarea#diario_informet, textarea#diario_tareasave {
+  width: 98%;
+  height: 150px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 265, ../../app/assets/stylesheets/custom.css.scss */
+a:link {
+  color: #09c;
+  text-decoration: none;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 271, ../../app/assets/stylesheets/custom.css.scss */
+a:hover {
+  color: #069;
+  text-decoration: underline;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 277, ../../app/assets/stylesheets/custom.css.scss */
+a:visited {
+  color: #069;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 282, ../../app/assets/stylesheets/custom.css.scss */
+a.enlaceb:link {
+  color: #A52A2A;
+  /*#ff0000;*/
+  text-decoration: none;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 288, ../../app/assets/stylesheets/custom.css.scss */
+a.enlaceb:hover {
+  color: #A52A2A;
+  /*#ff0000;*/
+  text-decoration: underline;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 294, ../../app/assets/stylesheets/custom.css.scss */
+a.enlaceb:visited {
+  color: #A52A2A;
+  /*#006400#ff0000;*/
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 299, ../../app/assets/stylesheets/custom.css.scss */
+nav {
+  float: left;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 304, ../../app/assets/stylesheets/custom.css.scss */
+nav {
+  background-color: white;
+  padding: 0;
+  white-space: nowrap;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 311, ../../app/assets/stylesheets/custom.css.scss */
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 317, ../../app/assets/stylesheets/custom.css.scss */
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 324, ../../app/assets/stylesheets/custom.css.scss */
+nav ul li a {
+  padding: 0;
+  font-weight: bold;
+  color: #0ffff;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 331, ../../app/assets/stylesheets/custom.css.scss */
+nav ul li a:visited {
+  color: #09c;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 336, ../../app/assets/stylesheets/custom.css.scss */
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 341, ../../app/assets/stylesheets/custom.css.scss */
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #006400;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 20px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 355, ../../app/assets/stylesheets/custom.css.scss */
+a img {
+  border: none;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 360, ../../app/assets/stylesheets/custom.css.scss */
+body {
+  background-color: #c9d690;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 365, ../../app/assets/stylesheets/custom.css.scss */
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 375, ../../app/assets/stylesheets/custom.css.scss */
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 381, ../../app/assets/stylesheets/custom.css.scss */
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 387, ../../app/assets/stylesheets/custom.css.scss */
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 393, ../../app/assets/stylesheets/custom.css.scss */
+.clear {
+  clear: both;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 398, ../../app/assets/stylesheets/custom.css.scss */
+#articles h2 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 404, ../../app/assets/stylesheets/custom.css.scss */
+#articles h2 .comments {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 410, ../../app/assets/stylesheets/custom.css.scss */
+#articles .author {
+  font-style: italic;
+  color: #333;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 416, ../../app/assets/stylesheets/custom.css.scss */
+#comments {
+  font-size: 12px;
+  background-color: #DDD;
+  padding: 0 20px;
+  width: 325px;
+  border: solid 1px #333;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 425, ../../app/assets/stylesheets/custom.css.scss */
+.comment {
+  border-bottom: solid 1px #999;
+  margin: 15px 0;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 431, ../../app/assets/stylesheets/custom.css.scss */
+.comment .author_name {
+  font-weight: bold;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 436, ../../app/assets/stylesheets/custom.css.scss */
+.fieldWithErrors {
+  display: inline;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 441, ../../app/assets/stylesheets/custom.css.scss */
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 451, ../../app/assets/stylesheets/custom.css.scss */
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 462, ../../app/assets/stylesheets/custom.css.scss */
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 469, ../../app/assets/stylesheets/custom.css.scss */
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 474, ../../app/assets/stylesheets/custom.css.scss */
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 480, ../../app/assets/stylesheets/custom.css.scss */
+#calendar table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 486, ../../app/assets/stylesheets/custom.css.scss */
+#calendar td, #calendar th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  padding: 6px;
+  border: 1px solid #999;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 494, ../../app/assets/stylesheets/custom.css.scss */
+#calendar jj {
+  background: #ffce79;
+  /*#ff9933;*/
+  color: #000000;
+  padding: 5px;
+  width: 90%;
+  background-repeat: repeat-x;
+  display: inline-block;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 504, ../../app/assets/stylesheets/custom.css.scss */
+#calendar th {
+  background: #83aec0;
+  color: #000000;
+  text-align: center;
+  width: 14.2857142857143%;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 512, ../../app/assets/stylesheets/custom.css.scss */
+#calendar td {
+  background: #FFF;
+  color: #777;
+  height: 80px;
+  vertical-align: top;
+  font-size: 16px;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 521, ../../app/assets/stylesheets/custom.css.scss */
+#calendar .notmonth {
+  color: #CCC;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 526, ../../app/assets/stylesheets/custom.css.scss */
+#calendar #month {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 534, ../../app/assets/stylesheets/custom.css.scss */
+#calendar #month a, #calendar #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #999;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 541, ../../app/assets/stylesheets/custom.css.scss */
+#calendar .today {
+  background-color: #D7F2FF;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 546, ../../app/assets/stylesheets/custom.css.scss */
+#calendar ul {
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+}
+
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
+/* line 554, ../../app/assets/stylesheets/custom.css.scss */
+#calendar li {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* line 136, ../../app/assets/stylesheets/custom.css.scss */
+/* line 562, ../../app/assets/stylesheets/custom.css.scss */
+.tabla {
+  margin-top: 25px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: right;
+  /*width:600px*/
+  width: 95%;
+}
+
+/* line 137, ../../app/assets/stylesheets/custom.css.scss */
+/* line 572, ../../app/assets/stylesheets/custom.css.scss */
+.tabla th {
+  padding: 5px;
+  font-size: 14px;
+  background-color: #83aec0;
+  /*background-image:url(fondo_th.png);*/
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-transform: uppercase;
+}
+
+/* line 138, ../../app/assets/stylesheets/custom.css.scss */
+/* line 584, ../../app/assets/stylesheets/custom.css.scss */
+.tabla th2 {
+  padding: 5px;
+  font-size: 14px;
+  background-color: #65b54c;
+  /*background-image:url(fondo_th.png);*/
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-transform: uppercase;
+}
+
+/* line 139, ../../app/assets/stylesheets/custom.css.scss */
+/* line 596, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo1 {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #e2ebef;
+  /*background-image:url(fondo_tr01.png);*/
+  background-repeat: repeat-x;
+  color: #34484E;
+  font-family: “Trebuchet MS”, Arial;
+}
+
+/* line 140, ../../app/assets/stylesheets/custom.css.scss */
+/* line 607, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo1 td {
+  padding: 5px;
+  text-align: left;
+}
+
+/* line 141, ../../app/assets/stylesheets/custom.css.scss */
+/* line 613, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo1 th {
+  /*background-image:url(fondo_tr01a.png);*/
+  background-position: left top;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #e2ebef;
+  background-repeat: repeat-x;
+  color: #34484E;
+  font-family: “Trebuchet MS”, Arial;
+}
+
+/* line 142, ../../app/assets/stylesheets/custom.css.scss */
+/* line 626, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo2 {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #9966ff;
+  /*background-image:url(fondo_tr02.png);*/
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-align: left;
+}
+
+/* line 143, ../../app/assets/stylesheets/custom.css.scss */
+/* line 638, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo2 td {
+  padding: 5px;
+  background-color: #9966ff;
+}
+
+/* line 144, ../../app/assets/stylesheets/custom.css.scss */
+/* line 644, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo2 th {
+  /*background-image:url(fondo_tr02a.png);*/
+  background-position: left top;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #9966ff;
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-align: left;
+}
+
+/* line 145, ../../app/assets/stylesheets/custom.css.scss */
+/* line 657, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo3 {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #ff9933;
+  /*background-image:url(fondo_tr02.png);*/
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-align: left;
+}
+
+/* line 146, ../../app/assets/stylesheets/custom.css.scss */
+/* line 669, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo3 td {
+  padding: 5px;
+  background-color: #ffce79;
+  /*#ff9933;*/
+}
+
+/* line 147, ../../app/assets/stylesheets/custom.css.scss */
+/* line 675, ../../app/assets/stylesheets/custom.css.scss */
+.tabla .modo3 th {
+  /*background-image:url(fondo_tr02a.png);*/
+  background-position: left top;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #eeaf41;
+  background-repeat: repeat-x;
+  color: #000000;
+  font-family: “Trebuchet MS”, Arial;
+  text-align: left;
+}
+
+/* line 148, ../../app/assets/stylesheets/custom.css.scss */
+/* line 688, ../../app/assets/stylesheets/custom.css.scss */
+.boton1 {
+  -moz-box-shadow: inset 0px 1px 0px 0px #fceaca;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #fceaca;
+  box-shadow: inset 0px 1px 0px 0px #fceaca;
+  background-color: #ffce79;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #eeb44f;
+  display: inline-block;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 20px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #ce8e28;
+}
+
+/* line 165, ../../app/assets/stylesheets/custom.css.scss */
+/* line 708, ../../app/assets/stylesheets/custom.css.scss */
+.boton1:hover {
+  background-color: #eeaf41;
+  box-shadow: 0px 0px 5px 0px #000000;
+  text-decoration: none;
+}
+
+/* line 169, ../../app/assets/stylesheets/custom.css.scss */
+/* line 715, ../../app/assets/stylesheets/custom.css.scss */
+.boton1:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 173, ../../app/assets/stylesheets/custom.css.scss */
+/* line 721, ../../app/assets/stylesheets/custom.css.scss */
+.boton3 {
+  -moz-box-shadow: inset 0px 1px 0px 0px #fceaca;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #fceaca;
+  box-shadow: inset 0px 1px 0px 0px #fceaca;
+  background-color: #ffce79;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #eeb44f;
+  display: inline-block;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 20px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #ce8e28;
+  float: right;
+}
+
+/* line 191, ../../app/assets/stylesheets/custom.css.scss */
+/* line 742, ../../app/assets/stylesheets/custom.css.scss */
+.boton3:hover {
+  background-color: #eeaf41;
+  box-shadow: 0px 0px 5px 0px #000000;
+  text-decoration: none;
+}
+
+/* line 195, ../../app/assets/stylesheets/custom.css.scss */
+/* line 749, ../../app/assets/stylesheets/custom.css.scss */
+.boton3:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 200, ../../app/assets/stylesheets/custom.css.scss */
+/* line 755, ../../app/assets/stylesheets/custom.css.scss */
+.boton2 {
+  -moz-box-shadow: inset 0px 1px 0px 0px #fff6af;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #fff6af;
+  box-shadow: inset 0px 1px 0px 0px #fff6af;
+  background-color: #c9d690;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #65b54c;
+  display: inline-block;
+  color: #333333;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #ffee66;
+  float: right;
+}
+
+/* line 218, ../../app/assets/stylesheets/custom.css.scss */
+/* line 776, ../../app/assets/stylesheets/custom.css.scss */
+.boton2:hover {
+  background-color: #a5cc52;
+  /*#65b54c;*/
+  box-shadow: 0px 0px 5px 0px #000000;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* line 223, ../../app/assets/stylesheets/custom.css.scss */
+/* line 785, ../../app/assets/stylesheets/custom.css.scss */
+.boton2:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 227, ../../app/assets/stylesheets/custom.css.scss */
+/* line 791, ../../app/assets/stylesheets/custom.css.scss */
+.botonV {
+  -moz-box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+  box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+  background-color: #f6b33d;
+  /*#dfbdfa;*/
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #cd8915;
+  display: inline-block;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #86ae47;
+}
+
+/* line 244, ../../app/assets/stylesheets/custom.css.scss */
+/* line 812, ../../app/assets/stylesheets/custom.css.scss */
+.botonV:hover {
+  background-color: #d29105;
+  box-shadow: 0px 0px 5px 0px #000000;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* line 249, ../../app/assets/stylesheets/custom.css.scss */
+/* line 820, ../../app/assets/stylesheets/custom.css.scss */
+.botonV:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 255, ../../app/assets/stylesheets/custom.css.scss */
+/* line 826, ../../app/assets/stylesheets/custom.css.scss */
+nav.botonera {
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  /* overflow-x: hidden;
+   overflow-y: hidden;*/
+  /* margin-left: 600px;*/
+  /* height: 40px;*/
+  /*margin: 250 auto;*/
+  width: 40%;
+  /*750px;*/
+  margin-right: 10px;
+  /*border: solid 1px black;*/
+  /*background: #65b54c;#028434;#6fbf4b; #8cb801;*/
+  /*-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;*/
+  float: right;
+}
+
+/* line 842, ../../app/assets/stylesheets/custom.css.scss */
+nav.botoneracentro {
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  width: 35%;
+  margin-right: 10px;
+  float: center;
+}
+
+/* line 270, ../../app/assets/stylesheets/custom.css.scss */
+/* line 850, ../../app/assets/stylesheets/custom.css.scss */
+nav.botonera2 {
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  width: 20%;
+  margin-right: 5px;
+  float: right;
+}
+
+nav.botonerapequeña {
+  font-family: Verdana,Tahoma,Geneva,sans-serif;
+  width: 10%;
+  margin-right: 5px;
+  float: right;
+}
+
+/* line 856, ../../app/assets/stylesheets/custom.css.scss */
+.actions {
+  width: 30%;
+}

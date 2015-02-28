@@ -1,0 +1,177 @@
+<!--#####################################
+# Listado de cheniles pertenecientes a una zona 
+#  - muestra animales en su interior
+#  - permite ordenado y eleccion de zona
+#  index->
+#  -> crear chenil nuevo
+    #####################################-->
+
+
+<h1> <%= " Listado Cheniles" %> </h1>
+
+
+<% if ((current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && current_persona.zona_id == @zona.id) %> 
+   <nav class="botonera2">
+	<%= link_to 'Crear chenil nuevo', new_chenil_path, :class=>"boton2verde enlaceb" %>
+        </p>
+   </nav>
+<% end %>  
+<hr/>
+
+<center>
+<table class="tabla">
+
+   <tr class="letragrande">
+
+   <td width="33%"> 
+     <%= link_to @zona.nombre, @zona %>
+   </td>
+
+   <!--recoge parametro ordenación-->
+   <td width="33%">
+   <center> 
+      <% @valor = ["Capacidad", "Espacio", "F.modificacion"] %>
+      <select onchange="window.location.href = this.value">
+      <option value="">Ordenar por</option>
+        <% if @zona.nil? %>
+          <% @valor.each do |valor| %>
+              <option value="/cheniles?busqueda=<%=valor%>"><%=valor%></option>  
+          <%end%>
+        <% else %>
+          <% @valor.each do |valor| %>
+              <option value="/cheniles?id=<%=@zona.id%>&busqueda=<%=valor%>"><%=valor%></option>  
+          <%end%>
+      <% end %>
+      </select>
+   </center>
+   </td>
+
+   <!--recoge parametro zona-->
+   <td width="33%"> 
+   <center> 
+    <select onchange="window.location.href = this.value">
+    <option value="">Zona</option>
+        <% @zonas.each do |zona| %>
+           <option value="/cheniles?id=<%=zona.id%>"><%=zona.nombre%></option>
+        <% end %>
+    </select>
+   </center>
+   </td>
+   </tr>
+
+</table>
+</center>
+</br>
+
+
+<!-------------------->
+<center>
+<table class="tabla">
+
+<tr>
+    <th>Numero</th>
+    <th>Capacidad</th>
+    <th>Espacio</th>
+    <th>Notas</th>
+    <th>Informacion</th>
+    <th>Modificación</th>
+    <th></th>
+    <th></th>
+    <th></th>
+</tr>
+
+
+
+<% @chenils.each do |chenil| %>
+  <% if @zona.id == chenil.zona_id %> 
+  <tr class="modo3">
+    <td><%= chenil.numero %></td>
+    <td><%= chenil.capacidad %></td>
+    <td><%= chenil.caplibre %></td>
+    <% if chenil.notas.blank? %>	
+	<td><%= "sin notas" %></td>
+    <% else %>
+	<td><%= link_to "notas chenil", chenil %></td>
+    <%end%>
+
+    <% if chenil.Informacion.blank? %>	
+	<td><%= "sin informacion" %></td>
+    <% else %>
+	<td><%= link_to "informacion", chenil %></td>
+    <%end%>
+    <td><%= chenil.updated_at.to_date %></td>
+    <td><%= link_to 'Ficha', chenil %></td>
+    <td></td>
+    <td></td>
+    </tr>
+
+<!--busqueda eficiente???? (todos)
+una busqueda por chenil en la zona (pero con fk)
+-->
+  <tr class="modo1">
+
+  <% @animals2 = Animal.find(:all, :conditions => ["chenil_id = ?", chenil.id], :order => "nombre ASC") %>
+
+    <% @contadoranimal=0 %>
+    <% @contadoraux=0 %>
+    <% @animals2.each do |animal| %>
+	<% if animal.chenil_id == chenil.id %>	
+              <% if @contadoraux>5 %>
+                   <% @contadoraux=0 %>
+                   <tr class="modo1">
+              <% end %>
+              <td>
+
+	      <% if animal.foto_content_type.nil? %>
+   		 <%= link_to image_tag('logo.png'), animal %></br>
+   	      <% else %>
+    		 <%= link_to image_tag(animal.foto.url(:thumb)), animal %></br>
+  	      <%end%>
+              <% if animal.nombre.length > 15 && (!animal.nombre.include? " ") %>
+                   <%= animal.nombre.from(0).to(15) %></br>
+                   <%= animal.nombre.from(16)%>
+              <% else %>
+                   <%= animal.nombre %>
+              <% end %>
+
+	      </td>
+
+              <% @contadoranimal= @contadoranimal+1 %>
+              <% @contadoraux = @contadoraux+1 %>
+        <% end %>
+    <%end%>
+
+    <!--Si chenil vacio: Separación entre cheniles-->
+    <% if @contadoranimal==0 %>
+        <tr class="modo1">
+        <td></td>
+        </tr>
+        <tr class="modo1">
+        <td></td>
+        </tr>
+    <% end %>
+
+    <!-- Calcula capacidad libre para cada chenil y si hay cambio actualiza el valor -->
+    <% @calculocaplibre = chenil.capacidad - @contadoranimal %>
+    <% if chenil.caplibre!=@calculocaplibre || chenil.ocupado!= @contadoranimal%>
+	<% chenil.caplibre=@calculocaplibre %>
+        <% chenil.ocupado=@contadoranimal %>
+        <% chenil.save %>    
+    <% end %>
+  </tr>
+  <% end %>
+
+<% end %>
+
+</table>
+</center>
+
+<br />
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Zonas', zonas_path %> 
+  </span>
+</nav>
+

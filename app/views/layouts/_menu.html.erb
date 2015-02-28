@@ -1,0 +1,36 @@
+<menu id="menu">
+
+<nav class="main_header">
+
+   <ul class="main-menu">
+
+
+      <% if signed_in? %>
+
+        <% if current_persona.ocupacion_id==7 %>    
+	  <li><%= link_to "ADMINISTRACION ZONAS", {:controller=> "zonas", :action=>"administracionzonas" } %></li>
+	  <li><%= link_to "ADMINISTRACION PERSONAL", personas_path %></li>
+	  <li><%= link_to "SALIR", signout_path, :method => :delete %></li>
+
+        <% else %>
+	  <li><%= link_to "ANIMALES", animals_path, :zona=> "todas" %></li>
+          <!--li><%= link_to "ANIMALES", {:controller => "animals", :action=>"index", :page_id=>"1", :zona=> "todas"} %></li-->
+          <!--li>< link_to "ANIMALES2", :action=> "cheniles", :controller=> "zonas", :id=> @chenil.zona_id %></li-->
+	  <li><%= link_to "ZONAS", zonas_path %></li>
+          <li><%= link_to "CHENILES", {:controller=> "zonas", :action=>"cheniles"} %>
+	  <li><%= link_to "HORARIOS", {:controller=> "horarios", :action=>"vistahorario" } %></li>
+	  <li><%= link_to "PERSONAL", personas_path %></li>
+          
+
+           
+	  <li><%= link_to "SALIR", signout_path, :method => :delete %></li>
+        <% end %>
+
+      <% else %>
+	  <li><%= link_to "INICIO", signin_path %></li>
+      <% end %>
+   </ul>
+
+</nav>
+</menu>
+

@@ -1,0 +1,138 @@
+<!--################################################
+  # Unifica los 7 informes de la semana en 1 dia
+  # unificaciónturnos ->
+  # -> indes / vistahorario
+###################################################-->
+
+<h1></h1>
+</br>
+</br>
+<%= "Mantenimiento" %>
+</br>
+<%= "- Unificando turnos " %>
+</br>
+<%= "- Unificando informes " %>
+
+
+<% if !@diarios.nil? %>
+
+<!-- Guarda los informes y turnos de la semana en campo de texto del lunes -->
+  <% @diarios.each do |diaant| %>
+    <% @fecha=diaant.fecha %>
+    <% @diasemana=@fecha.wday %>
+
+
+<!--Si dia es lunes referencialo-->
+    <% if @diasemana==1 %>
+	<% @lunes=diaant %>
+        <% @guardianlunes=1 %>
+    <% end %>
+    
+<!--No existe lunes referenciado? BUSCAR-->
+    <% if @lunes.nil? %>
+       <% if @diasemana!=1 %>
+         <% @fechalunes=@fecha-(@diasemana-1) %>
+         <% @lunes = Diario.find(:all, :conditions => ["zona_id = ? AND fecha = ?", @zona, @fechalunes]).first %>
+       <% end %>
+
+       <!---No se encuentra? CREAR-->
+       <% if @lunes.nil? %>
+         <% @lunes=Diario.create(:fecha => @fechalunes, :zona_id => @zona.id) %>
+       <% end %>
+
+    <% end %>
+
+
+  <!-- Unifica Dia en lunes: turnos mañana y tarde, Informes Mañana y Tarde-->
+    <!--Es el lunes-->
+    <% if @diasemana==1 %>
+
+       <% @lunes.nuevoI=@lunes.fecha.to_s%>
+       <% @lunes.nuevoI="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Lunes: "+@lunes.fecha.to_s+"</font>"%>
+       <% if !@lunes.turnosm.nil? && !@lunes.turnosm.empty? %>
+           <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+@lunes.turnosm %>
+       <%end%>
+       <% if !@lunes.turnost.nil? && !@lunes.turnost.empty?%>
+           <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+@lunes.turnost %>
+       <%end%>
+       <% if !@lunes.informe.nil? && !@lunes.informe.empty?&& @lunes.informe.length>4 %> 
+	   <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+"<span style=text-decoration:underline><span style=font-weight:bold>"+"   Informe Mañana:   "+"</span></span>"+"</br></br>"+@lunes.informe %>
+       <% end %>
+
+       <% if !@lunes.informet.nil? && !@lunes.informet.empty? && @lunes.informet.length>4 %> 
+	   <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+"<span style=text-decoration:underline><span style=font-weight:bold>"+"   Informe Tarde:   "+"</span></span>"+"</br></br>"+@lunes.informet %>
+       <% end %>
+       <% @lunes.save %>
+
+    <!--No es el lunes-->
+    <% else %>   
+
+       <!-- escribir dia de la semana -->
+       <% if diaant.fecha.wday==2 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Martes: "+diaant.fecha.to_s+"</font>" %>
+       <% end %>
+       <% if diaant.fecha.wday==3 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Miercoles: "+diaant.fecha.to_s+"</font>" %>
+       <% end %>
+       <% if diaant.fecha.wday==4 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Jueves: "+diaant.fecha.to_s+"</font>" %>
+       <% end %>
+       <% if diaant.fecha.wday==5 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Viernes: "+diaant.fecha.to_s+"</font>" %>
+       <% end %>
+       <% if diaant.fecha.wday==6 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Sabado: "+diaant.fecha.to_s+"</font>" %> 
+       <% end %>
+       <% if diaant.fecha.wday==0 %>
+          <% @stringdiasemana="<font style=color:rgb(0,0,0);background-color:rgb(250,255,0)><span style=font-weight:bold>"+"Domingo: "+diaant.fecha.to_s+"</font>" %>
+       <% end %>
+
+<!-- ------------------------------------------------------- -->  
+       <% if @lunes.nuevoI.nil? || @lunes.nuevoI.empty? %>
+          <% @lunes.nuevoI=@stringdiasemana %>
+       <% else %>
+          <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+" --------------------------------------------- "+"</br>"+@stringdiasemana %>
+       <% end %>
+
+       <% if !diaant.turnosm.nil? && !diaant.turnosm.empty?%>
+           <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+diaant.turnosm %>
+       <%end%>
+       <% if !diaant.turnost.nil? && !diaant.turnost.empty?%>
+           <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+diaant.turnost %>
+       <%end%>
+
+       <% if !diaant.informe.nil? && !diaant.informe.empty? && diaant.informe.length>4 %> 
+	   <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+"<span style=text-decoration:underline><span style=font-weight:bold>"+"   Informe Mañana:   "+"</span></span>"+"</br></br>"+diaant.informe %>
+       <% end %>
+
+       <% if !diaant.informet.nil? && !diaant.informet.empty? && diaant.informet.length>4 %> 
+	   <% @lunes.nuevoI=@lunes.nuevoI+"</br>"+"<span style=text-decoration:underline><span style=font-weight:bold>"+"   Informe Tarde:   "+"</span></span>"+"</br></br>"+diaant.informet %>
+       <% end %>
+
+       <% diaant.destroy %>
+       <% @lunes.save %>
+
+    <% end %>  
+
+
+<%end%>
+
+
+
+<% if !@lunes.nil? %>
+   <% @lunes.informe=@lunes.nuevoI %>
+   <% @lunes.nuevoI=nil %>
+   <% @lunes.unificado=1 %>
+   <% @lunes.informet=nil %>
+   <% @lunes.save %>
+<%end%>
+
+<%end%><!--no hay diarios-->
+
+<%@zona.fechaunif=@zona.fechaunif+7%>
+<%@zona.save%>
+
+<!-- Redireccion a vistahorario -->
+<script type="text/javascript">
+    window.location.href="/vistahorario"  
+</script>

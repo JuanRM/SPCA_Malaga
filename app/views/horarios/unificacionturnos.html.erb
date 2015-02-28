@@ -1,0 +1,73 @@
+<!--###################################################
+  # guarda los turnos anteriores a 2 semanas en un campo de texto del día
+  # y los borra
+  # vistahorario (automatico) ->
+  # -> unificación
+#####################################################-->
+
+<h1></h1>
+</br>
+</br>
+
+<%= "Mantenimiento" %>
+</br>
+<%= "- Unificando turnos " %>
+
+
+<!-- BORRA turnos sueltos en la zona anteriores a 4 semanas -->
+<% if @fechainicio >= @cuatrosemanas %> 
+
+    <% @horariosantiguos = Horario.find(:all, :conditions=>["zona_id = ? AND fecha <= ?", @zona.id, @cuatrosemanas]) %>
+
+    <% @horariosantiguos.each do |horarioant| %>
+	  <% horarioant.destroy %>
+    <% end %>
+
+<% end %>
+
+
+<% @horarios.each do |horario| %>
+
+<!--Busca el día al que pertenece en turno-->
+    <%if @diario.nil? || @diario.fecha!=horario.fecha%>
+       <% @diario=@diarios.find{ |d| d.fecha==horario.fecha} %>
+    <% end %>
+
+<!--Si no se encuentra el día al que pertenece el turno lo crea-->    
+    <%if @diario.nil?%>
+        <% @diario=Diario.create(:fecha => horario.fecha, :zona_id => @zona.id) %>
+    <% end %>
+
+<!--guarda el turno en el campo de texto turnost/turnosm del día-->
+    <% if !@diario.nil? %>
+
+         <% if horario.tarde==1 && !horario.persona.nil? %>
+           <% if @diario.turnost.nil? %>
+	      <% @diario.turnost= "Turnos tarde: "+horario.persona.nombre %>	
+           <%else%>
+	      <% @diario.turnost= @diario.turnost+", "+horario.persona.nombre %>
+           <%end%>
+        <% end %>
+
+        <% if horario.tarde!=1 && !horario.persona.nil? %>
+           <% if @diario.turnosm.nil? %>
+	      <% @diario.turnosm= "Turnos mañana: "+horario.persona.nombre %>
+	   <%else%>
+              <% @diario.turnosm= @diario.turnosm+", "+horario.persona.nombre %>
+           <%end%>
+        <% end %>
+	
+        <% @diario.save %>
+
+    <%end%>
+
+    <% horario.destroy %>
+
+<% end %> 
+
+
+<!-- Redirecciona a unificación -->
+<script type="text/javascript">
+    window.location.href="/horarios_unificacion"  
+</script>
+

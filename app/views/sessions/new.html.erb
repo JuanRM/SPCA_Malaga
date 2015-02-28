@@ -1,0 +1,33 @@
+<!--#####################################
+# Recoge datos para crear una sesion
+#   inicio->
+#######################################-->
+
+<h1>Inicio Sesión</h1>
+<hr/>
+
+
+<%= form_for(:session, :url => sessions_path) do |f| %>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  <div>
+
+  <div class="field">
+    <%= f.label :contraseña %><br />
+    <%= f.password_field :password %>
+  </div>
+  </br>
+
+  <!-- f.create -->
+  <div class="actions">
+    <%= f.submit "Iniciar Sesión" %>
+  </div>
+  </br>
+
+<% end %>
+
+

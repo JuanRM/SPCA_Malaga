@@ -1,0 +1,126 @@
+<!--##################################################
+  # Muestras los informes de la semana ordenado por dias
+  #    vistahorario / index -> 
+  #    -> informeAnteriores
+###################################################-->
+
+<h1> Informes Semana</h1>
+
+
+<% if (@persona.ocupacion_id==1 || @persona.ocupacion_id==3) && @persona.zona_id==@zona.id %>
+   <nav class="botonera2">
+     <% if @date==Date.today %>
+        <%= link_to 'Semana_anterior', {:controller=> "horarios", :action=>"informeSemana", :fecha=>@date-7, :zona=>@zona.id}, :class=>"boton2verde enlaceb" %>
+     <% else %>
+        <%= link_to 'Anteriores', {:controller=> "horarios", :action=>"informeAnteriores"}, :class=>"boton2verde enlaceb" %>
+     <% end %>
+   </nav>
+
+<%end%>
+<hr/>
+
+</br>
+</br>
+
+<% if @diarios.first.nil?%>
+   <%="No hay diarios/informes guardados para esta semana"%>
+   </br>
+   </br>
+<%else%>
+
+  <p>
+  <b><%= @diarios.first.zona.nombre %></b>
+  </p>
+
+
+  <% @diarios.each do |diario| %>
+    <!-- @añadir=0 %--> 
+
+    <% if ((@persona.ocupacion_id==1 || @persona.ocupacion_id==3) && @persona.zona_id==diario.zona_id) %>
+        <p>
+        <nav class="botonerapequeña">
+	    <%= link_to 'Editar', {:controller=> "diarios", :action=>"edit", :id=>diario}, :class=>"boton2verdeder enlaceb" %>
+        </nav>
+        </p>
+    <% end %>
+
+  
+  
+    <% if diario.fecha>@hoy-2 && ((@persona.ocupacion_id==2 && @persona.zona_id==diario.zona_id) || (!@persona.ocupacion_id.nil? && @persona.ocupacion_id!=2)) %>
+      <!-- @añadir=1 %-->
+      <p>
+      <nav class="botonera2sinmargen">
+         <a href="/add_informe?id=<%=diario.id%>" class="boton2der">Añadir Informe</a>
+      </nav>
+      </p>
+    <% end %>
+
+
+    </br>
+    <div class="roundB">
+
+
+<!--Cabecera dia--------------------->
+    <% calculodia = diario.fecha.wday %>
+
+    <b>
+    <% case calculodia %>
+      <% when 1 %>
+          <%= "Lunes" %>
+      <% when 2 %>
+          <%= "Martes" %>
+      <% when 3 %>
+          <%= "Miercoles" %>
+      <% when 4 %>
+          <%= "Jueves" %>
+      <% when 3 %>
+          <%= "Viernes" %>
+      <% when 3 %>
+          <%= "Sabado" %>
+    <% else %>
+        <%= "Domingo" %>
+    <% end %>
+    </b>
+    <%=" / "%>
+
+
+    <jj><%= link_to diario.fecha.strftime("%d-%m-%Y"), diario %></jj>
+    </br>
+    </br> 
+
+
+    <ul>
+    <p>
+    <b>Informe Mañana:</b>
+    <% if diario.informe.nil? || diario.informe.empty? %>
+	<%= simple_format h diario.informe %>
+    <% else %>
+        <%= markdown diario.informe %>
+    <% end %>
+    </p>
+    </ul>
+    </br>
+
+    <ul>
+    <p>
+    <b>Informe Tarde:</b>
+    <% if diario.informet.nil? || diario.informet.empty? %>
+	<%= simple_format h diario.informet %>
+    <% else %>
+        <%= markdown diario.informet %>
+    <% end %>
+    </p>
+    </ul>
+
+  </div>
+  </br>
+
+  <%end%>
+
+<%end%>
+
+</br>
+<p>
+<%= link_to 'Horarios', {:action=> "vistahorario"} %>
+</p>
+

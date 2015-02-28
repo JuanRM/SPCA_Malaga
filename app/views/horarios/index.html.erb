@@ -1,0 +1,186 @@
+<!--#############################################
+# HORARIOS
+#   CALENDARIO MES COMPLETO: Muestra turnos asignados a una zona
+#    vistahorario -> 
+#    -> elegir turnos / asignar turnos
+#    -> ver información dia / ver informes semana 
+###############################################-->
+
+<!--<h1></h1>-->
+<h4>Vista Mes</h4>
+
+<!-- Zonas externo e intercambio sin diarios ni turnos -->
+<% if @zona.id==14 %>
+      <hr/>
+
+      <table class="tabla">
+	<td>
+		<b>Zona:</b>
+		<b><%= @zona.nombre %></b>
+        </td>
+	<td>
+		<b>Ocupacion:</b>
+		<b><%= @ocupacion.nombre %></b>
+        </td>
+      </table>
+      </br>
+
+  <select onchange="window.location.href = this.value">
+    <option value="">Cambiar zona</option>
+      <% @zonas.each do |zona| %>
+       <option value="/horarios?month=<%=@date%>&zona=<%=zona.id%>"><%=zona.nombre%></option>
+      <%end%>
+  </select>
+
+<% else %>
+
+  <nav class="navdias">
+    <ul class="main-menu">
+        <li><%= link_to 'Ayer', {:controller=> "diarios", :action=>"show", :fecha=>@hoy-1.day, :zona=>@zona.id} %></li>
+        <li><%= link_to 'Hoy', :controller=> "diarios", :action=>"show", :fecha=>@hoy, :zona=>@zona.id %></li>
+        <li><%= link_to 'Mañana', {:controller=> "diarios", :action=>"show", :fecha=>@hoy+1.day, :zona=>@zona.id} %></li>
+    </ul>
+  </nav>
+
+
+  <nav class="botoneracentro">
+  <center>     
+       <%= link_to 'Informes Semana', {:controller=> "horarios", :action=>"informeSemana", :fecha=>@hoy, :zona=>@zona.id}, :class=>"boton1verde" %>
+  </center>
+  </nav>
+
+  <hr/>
+
+
+  <table class="tabla">
+    <td>
+	<b>Zona:</b>
+	<b><%= @zona.nombre %></b>
+    </td>
+    <td>
+	<b>Ocupacion:</b>
+	<b><%= @ocupacion.nombre %></b>
+    </td>	
+  </table>
+
+
+
+  <select onchange="window.location.href = this.value">
+    <option value="">Cambiar zona</option>
+    <% @zonas.each do |zona| %>
+      <option value="/horarios?month=<%=@date%>&zona=<%=zona.id%>"><%=zona.nombre%></option>
+    <%end%>
+  </select>
+
+  <br />
+
+  <div id="calendar">
+   <h3 id="month">
+     <%= link_to "<", :zona=> @zona.id, :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+     <%= es_month(@date)%>
+     <%= h @date.strftime("%Y") %>
+
+     <%= link_to ">", :zona=> @zona.id, :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+   </h3>
+
+   <%= calendar_for @horarios, :year => @date.year, :month => @date.month, :first_day_of_week =>1 do |t| %>
+   <table>
+    <%= t.head('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') %>
+    <% t.day(:day_method => :fecha) do |date, horarios| %>
+
+    <% @diarios.each do |diario| %>
+	<% if diario.fecha==date %>
+	   <% @diariovar=diario %>
+        <% end %>
+    <%end%>
+
+
+    <% if @diariovar.fecha==date %>   
+         <jj2><%= link_to date.strftime("%d-%m-%Y")+" i", @diariovar %></jj2> 
+    <% else %>
+         <jj><%= link_to date.strftime("%d-%m-%Y"), new_diario_path(@diario, :fecha=> date, :zona=> @zona.id) %></jj>
+    <%end%>
+    <br />
+
+
+
+
+     <!--Controla elegir/asignar turno mañana-->
+     <% if @zona.id==@persona.zona_id && date>=@hoy-1  && @zona.id != 1 && @zona.id != 14 && @zona.id != 11 %>
+       <% case @ocupacion.id %>
+       <% when 2 || 5 %>
+	    <%= link_to 'Mañana', {:action=> "crearturnodatos", :fecha=> date, :tarde=> 0, :zona=> @zona.id} %>
+       <% when 1 || 3 %>
+	    <%= link_to 'Mañana', {:action => "asignar_turno", :fecha=> date, :tarde=> 0, :zona=> @zona.id} %>
+       <% end %>
+  
+     <% else %> 
+       <%="Mañana"%>
+     <% end %>
+    
+     <ul>
+
+     <% @cont=4 %>
+     <% horarios.each do |hora| %>
+        <% if hora.tarde==0 %>
+           <%@cont=@cont-1%>
+	   <% if (hora.persona_id == current_persona.id || ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3) && current_persona.zona_id==hora.zona_id)) && hora.fecha >= @hoy+1 %>	
+              <%= link_to h(hora.persona.nombre.from(0).to(14)), hora %>
+	      <br/>
+           <% else %>
+	      <%= hora.persona.nombre.from(0).to(14) %>
+	      <br/>	
+           <% end %>	
+	<% end %>
+     <%end%>
+
+     <% while @cont>=0 %>
+        <%@cont=@cont-1%>
+        </br>
+     <% end %>
+
+    <ul>
+    <% if @zona.id== @persona.zona_id && date >= @hoy-1 && @zona.id != 1 && @zona.id != 14 && @zona.id != 11 %>
+  
+       <% case @ocupacion.id %>
+       <% when 2 || 5 %>
+	    <%= link_to 'Tarde', {:action=> "crearturnodatos", :fecha=> date, :tarde=> 1, :zona=> @zona.id} %>
+       <% when 1 || 3 %>
+	    <%= link_to 'Tarde', {:action => "asignar_turno", :fecha=> date, :tarde=> 1, :zona=> @zona.id} %>
+       <% end %>
+
+    <% else %>
+       <%= "Tarde" %>  
+    <%end%>
+ 
+   
+ 
+    <ul> 
+     <% @cont=4 %>
+     <% horarios.each do |hora| %>
+
+        <% if hora.tarde==1 %>
+           <% @cont=@cont-1 %>
+	   <% if (hora.persona_id == current_persona.id || ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3) && current_persona.zona_id==hora.zona_id)) && hora.fecha >= @hoy+1 %>
+               <%= link_to h(hora.persona.nombre.from(0).to(14)), hora %>
+	       </br>
+	   <% else %>
+	      <%= hora.persona.nombre.from(0).to(14) %>
+	      </br>
+           <% end %>
+	<% end %>
+     <%end%>
+     <% while @cont>0 %>
+         <% @cont=@cont-1 %>
+	 </br>
+     <% end %>
+
+  <% end %>
+
+<%end%>
+
+</table>
+</div>
+
+<br />
+<%end%>

@@ -1,0 +1,112 @@
+<!--#####################################
+  # Añade informe a un día
+  #  show->
+  #  -> show
+#######################################-->
+
+<h1>Añadir Informe</h1>
+<hr/>
+
+<table class="tabla">
+ <tr class="letragrande">
+  <td><p>
+    <b>Zona:</b>
+    <%= @diario.zona.nombre %>
+  </p></td>
+
+  <td><p>
+    <b>Fecha:</b>
+    <%= @diario.fecha.strftime("%d-%m-%Y") %>
+  </p></td>
+ </tr>
+</table>
+
+
+<div class="roundB">
+<ul><p>
+  <% if !@diario.informe.nil? && !@diario.informe.empty? %>
+    <b>Informe Mañana:</b>
+    <%= markdown @diario.informe %>
+  <% else %>
+    <b>Informe Mañana:</b>
+    <%= simple_format h @diario.informe %>	
+  <% end %>
+</p></ul>
+</div>
+</br>
+
+<div class="roundB">
+<ul><p>
+  <% if !@diario.informet.nil? && !@diario.informet.empty? %>
+    <b>Informe Tarde:</b>
+    <%= markdown @diario.informet %>	
+  <% else %>
+    <b>Informe Tarde:</b>
+    <%= simple_format h @diario.informet %>
+  <% end %>
+</p></ul>
+</div>
+</br>
+
+<!----------------------------------------------------------------
+control: voluntario.zona=zona, dia.fecha>=ayer
+----------------------------------------------------------------->
+<% if (current_persona.ocupacion_id!=2 || (current_persona.ocupacion_id==2 && current_persona.zona_id== @diario.zona_id)) && @diario.fecha >= @hoy-1 %>
+
+ <%= form_for(@diario) do |f| %>
+  <% if @diario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@diario.errors.count, "error") %> prohibited this diario from being saved:</h2>
+
+      <ul>
+      <% @diario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :"añadir a informe mañana: " %><br />
+    <%= f.text_area :nuevoI %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"añadir a informe tarde: " %><br />
+    <%= f.text_area :nuevo %>
+  </div>
+  </br>
+
+  <div class="actions">
+    <%= f.submit "Guardar Informe" %>
+  </div>
+ <% end %>
+
+<!-------------------------------------------------------------------
+Presenta alerta según tipo de acceso no permitido
+redirecciona a show
+-------------------------------------------------------------------->
+<%else%>
+
+	<% if @diario.fecha <= @hoy-1 %>
+             <% flash[:alert] = 'Acceso no permitido, No esta permitido añadir informes con fecha anteriores a ayer.' %>
+	<% else %>
+            <% if current_persona.ocupacion_id==2 && current_persona.zona_id != @diario.zona_id  %>
+       		<% flash[:alert] = 'Acceso no permitido, Los Voluntarios solo pueden añadir informes en su zona.' %>
+            <% else %>
+               <% flash[:alert] = 'Acceso no permitido.' %>
+            <% end %>
+	<% end %>
+
+      <!-- Redireccion a show -->
+      <script type="text/javascript">
+          window.location.href="/diarios/<%=@diario.id%>"  
+      </script>
+<%end%>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+      <a href="/horarios?month=<%=@diario.fecha%>&zona=<%=@diario.zona_id%>">Calendario</a>
+  </span>
+</nav>

@@ -1,0 +1,214 @@
+<h1>Listado animales</h1>
+
+
+
+<% if ! current_persona.nil? && (current_persona.ocupacion_id == 1  || current_persona.ocupacion_id == 3) %>
+  <nav class="botonera2">
+    <a href="animals/new" class="boton2verde enlaceb">Crear Animal Nuevo</a>
+  </nav>
+  </p>    
+<% end %>
+<hr/>
+
+
+ 
+<% if !@zona.nil? %>
+  <b>Zona:</b>
+  <%= @zona.nombre %>
+<% end %>
+
+
+<!-- Selección filtros busqueda desplegables -->
+<center>
+<table class="tabla">
+
+ <tr class="letragrande">
+
+  <td width="50%">
+
+   <% if $numero==6 %>
+   <p>
+     <%= "Busqueda por: " %></br>
+     <% @especies = Especie.all %>
+     <select onchange="window.location.href = this.value">
+       <option value="">Especie</option>
+       <% @especies.each do |especie| %>
+         <option value="/animals?especie=<%=especie.id%>"><%=especie.nombre%></option>
+      <%end%>
+     </select>
+   </p>
+   <% end %>
+
+   <% if $numero==7 %>
+   <p>
+     <%= "Busqueda por: " %></br>
+     <% @sexo = ["neutro", "macho", "hembra"] %>
+     <select onchange="window.location.href = this.value">
+       <option value="">Sexo</option>
+       <% @sexo.each do |sexo| %>
+         <option value="/animals?sexo=<%=sexo%>"><%=sexo%></option>
+       <%end%>
+     </select>
+   </p>
+   <% end %>
+
+   <% if $numero==1 || $numero == 4 %>
+
+    <% if @zonaurl.nil? %>
+      <%= form_tag animals_path, :method => 'get' do %>
+        <%= "Busqueda por " %><%= @busqueda %>
+
+         <p>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Buscar", :name => nil %>
+         </p>
+      <% end %>
+
+    <% else %>
+     <%= form_tag animals_path, :method => 'get' do %>
+        <%= "Busqueda por " %><%= @busqueda %>
+          <p>
+            <%= text_field_tag :search, params[:search] %>
+            <%=  %>    
+            <%= submit_tag "Buscar", :name => nil %>
+          </p>
+        <% end %>
+     <% end %>
+    <% end %>
+  </td>
+
+  <td width="50%">
+  <center> 
+     <% @valor = ["Nombre", "Raza", "Especie", "Sexo", "F.entrada", "F.modificacion"] %>
+     <select onchange="window.location.href = this.value">
+     <option value="">Ordenar por</option>
+
+       <% if @zonaurl.nil? %>
+
+         <% @valor.each do |valor| %>
+           <option value="/ordenado?busqueda=<%=valor%>"><%=valor%></option>  
+         <%end%>
+
+       <% else %>
+
+         <% @valor.each do |valor| %>
+           <option value="/ordenado?busqueda=<%=valor%>&zona=<%=@zonaurl%>"><%=valor%></option>  
+         <%end%>
+
+       <% end %>
+
+     </select>
+  </center>
+  </td>
+
+  <!--BUSQUEDA DOBLE ZONA-->
+  <td width="50%">
+
+   <select onchange="window.location.href = this.value">
+      <option value="">Zona</option>
+
+          <option value="/ordenado?zona=todas&busqueda=<%=@busqueda%>"><%="Todas"%></option>
+          <% @zonas.each do |zona| %>
+            <option value="/ordenado?zona=<%=zona.id%>&busqueda=<%=@busqueda%>"><%=zona.nombre%></option>
+          <% end %>
+   </select>
+  </td>
+
+
+ </tr>
+</table>
+</center>
+
+
+
+<form>
+<center>
+<table class="tabla">
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Zona</th>
+    <th>Especie</th>	
+    <th>Raza</th>
+    <th>Sexo</th>
+    <% if $numero==2 %>
+       <th>Entrada</th>
+    <% else %>
+       <th>Modificado</th>
+    <% end %>
+    <th>Observaciones</th>
+  </tr>
+
+
+ <% @animals.each do |animal| %>
+
+
+   <td><center>
+   <% if animal.foto_content_type.nil? %>
+      <%= link_to image_tag('logo.png'), animal %>
+   <%else%>
+      <%= link_to image_tag(animal.foto.url(:thumb)), animal %>
+   <%end%>
+   </center></td>
+
+    <% if animal.nombre.length > 15 && (!animal.nombre.include? " ") %>
+        <td width="7%"> 
+        <%= animal.nombre.from(0).to(15) %>
+        <%= animal.nombre.from(16)%>
+        </br></td>
+    <% else %>
+        <td width="7%">
+        <%= animal.nombre %></td>
+    <% end %>
+
+    <td><%= link_to animal.zona.nombre, :controller=> "zonas", :action=> "cheniles", :id=> animal.zona_id %></td>
+    <td>
+      <% if !animal.especie.nil? %>
+          <%= animal.especie.nombre %>
+      <% end %>
+    </td>
+    <td><%= animal.raza %></td>
+    <td><%= animal.sexo %></td>
+    <% if $numero==2 %>
+       <td><%= animal.fecha_entrada %></td>
+    <% else %>
+       <td><%= animal.updated_at.to_date %></td>
+    <% end %>
+
+    <% if !animal.observaciones.nil? && !animal.observaciones.empty? %>
+       <td><%= link_to "observaciones", animal %></td>
+    <% else %>
+       <td></td>
+    <% end %>
+
+  </tr>
+
+
+
+<%end%>
+
+</table>
+</center>
+</form>
+
+<br />
+
+<!-- Enlaces paginación -->
+<br />
+<% if @masanimales == 1 %>
+  <center>
+  <% if @pagina <= 1 %>
+     <%= "<" %>
+  <% else %>
+     <%= link_to '<', :action=> "ordenado" , :busqueda=>@busqueda, :zona=>$zonaurl, :page_id => (@pagina - 1) %>
+  <% end %>
+
+  <% if @pagina < @pagina_count %>
+     <%= link_to '>', :action=> "ordenado" , :busqueda=>@busqueda, :zona=>$zonaurl, :page_id => (@pagina + 1) %>
+  <% else %>
+     <%= ">" %>
+  <% end %>
+  </center>
+<%end%>
+</br>
+

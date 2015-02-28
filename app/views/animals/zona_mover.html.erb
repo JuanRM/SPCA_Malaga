@@ -1,0 +1,47 @@
+<!--#####################################
+ # Elige zona de libremoviento a la que mover animal 
+ #  mover->
+ #  ->mover
+########################################-->
+
+<h1></h1>
+</br>
+
+<b>Listado de zonas de "libre movimiento"</b>
+<hr/>
+</br>
+
+<% @cont=0 %>
+
+<center>
+<table class="tabla">
+
+  <% @zonas.each do |zona| %>
+
+    <% @cont=@cont+1 %>
+
+    <% if @cont == 1 %>
+     <tr class="letragrande">
+     <td>
+ 	<%= link_to zona.nombre, :action=> "mover", :id1=> zona.id, :id2 => @animal.id %>
+     </td>
+    <% end %>
+    <% if @cont == 2%>
+     <td>
+        <%= link_to zona.nombre, :action=> "mover", :id1=> zona.id, :id2 => @animal.id %>	
+	<% @cont=0 %>
+     </td>
+     </tr>
+  <% end %>
+
+
+<%end%>
+</table>
+</center>
+
+</br></br></br></br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Atras', @animal %>
+  </span>
+</nav>

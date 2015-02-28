@@ -1,0 +1,81 @@
+<!--#####################################
+ # Guarda los cambios en el movimiento del animal 
+ #  mover->
+ #  ->show ()redirect-------------------------------
+#######################################-->
+
+<h1>Movimiento</h1>
+<hr/>
+
+<!--Controla capacidad max de chenil destino-->
+<!-----CONTROLAR SI CURRENT_USER.ZONA O ZONALIBREMOV------>
+<% if @chenil.caplibre-1 < 0 %>
+
+  <center>
+  <table class="tabla">
+
+   <th><%= "Imposible mover animal, el chenil de destino está completo!" %></th>
+   </br></br></br>
+   </br>
+   </table>
+   </center>
+
+<% else %>
+
+  </br>
+  <% if @animal.foto_content_type.nil? %>
+     <%= image_tag 'logo.png' %>       
+  <% else %>
+     <%= image_tag @animal.foto.url(:thumb) %>
+  <% end %>
+  </br>
+  <%= @animal.nombre %>
+  </br></br>
+
+
+
+  <center>
+  <table class="tabla">
+	<tr>
+		<th>Zona</th>
+		<th><%= @animal.zona.nombre %></th>
+		<th> -->> </th>
+		<th>Zona nueva</th>	
+		<th><%= @chenil.zona.nombre %></th>
+	</tr>
+ 	<tr>
+		<td>Chenil</td>
+		<td><%= @animal.chenil.numero %></td>
+		<td>-->></td>
+		<td>Chenil nuevo</td>
+		<td><%= @chenil.numero %></td>
+	</tr>
+  </table>
+  </center>
+
+
+        <% @chenildesde=@animal.chenil %>
+	<% @animal.chenil_id = @chenil.id %>
+	<% @animal.zona_id = @chenil.zona_id %>
+	
+	<% if @animal.update_attributes(params[:animal]) %>
+		<% @chenil.caplibre=@chenil.caplibre-1 %>
+                <% @chenil.ocupado=@chenil.ocupado+1 %>
+                <% @chenildesde.caplibre = @chenildesde.caplibre+1 %>
+                <% @chenildesde.ocupado = @chenildesde.ocupado-1 %>
+                <% @chenil.save %>
+                <% @chenildesde.save %>
+        <% end %>
+
+<% end %>
+
+</br></br></br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Ficha', @animal %> |
+	<%= link_to 'Listado animales', animals_path %>
+  </span>
+</nav>
+
+
+

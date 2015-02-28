@@ -1,0 +1,82 @@
+<!--#####################################
+ # Edita el tipo de una relación
+ #  show->
+ #  -> update
+#######################################-->
+
+<h1>Editar relación</h1>
+<hr/>
+</br>
+
+
+<table class="tabla">
+  <tr>
+    <th>Zona</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+
+    <th>Zona</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+  <tr class="modo1">
+    <td><%= @relacion_animal.animal.chenil.zona.nombre %>
+    <td>
+    <% if @relacion_animal.animal.foto_content_type.nil? %>
+	<%= image_tag 'logo.png'%>
+    <% else %>
+        <%= image_tag @relacion_animal.animal.foto.url(:thumb) %>
+    <%end%>
+    </td>
+
+    <td><%= @relacion_animal.animal.nombre %></td>
+
+    <td><%= @relacion_animal.animal2.zona.nombre %></td>
+    <td>
+    <% if @relacion_animal.animal2.foto_content_type.nil? %>
+        <%= image_tag 'logo.png'%>
+    <% else %>
+        <%= image_tag @relacion_animal.animal2.foto.url(:thumb) %>
+    <%end%>
+    </td>
+    <td><%= @relacion_animal.animal2.nombre %></td>
+  
+    <td><%= @relacion_animal.relacion %></td>
+
+    <% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 2 || current_persona.ocupacion_id == 3) %>
+      <td><%= link_to 'Eliminar', @relacion_animal, confirm: '¿Esta seguro?', method: :delete %></td>
+    <% end %>
+  </tr>
+
+</table>
+
+<br />
+
+<%= form_for(@relacion_animal) do |f| %> 
+
+  <%= f.select :relacion, ["", "pelea","regular", "sin información", "bien"] %>
+  <br /><br /><br />
+
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+
+<%end%>
+
+</br>
+
+
+<nav class="links_bajo">
+  <span style="float:right">  
+     <%= link_to 'Atras', @relacion_animal %> |
+     <%= link_to 'Animales', animals_path %>
+  </span>
+</nav>

@@ -1,0 +1,36 @@
+<!--#############################################
+  # Responsable asigna un turno a un colaborador de su zona
+  #    vistahorario / index -> 
+  #    -> crearturnodatos
+##############################################-->
+
+<h1>Asignar turno</h1>
+<hr/>
+</br>
+
+
+
+<%= @zona.nombre %>
+</br>
+</br>
+</br>
+
+<% if @ocupacion.id==1 || @ocupacion.id==3 %>
+
+    <!-- SELECCIONA USUARIO, VOLUNTARIO/AUXILIAR DE SU ZONA -->
+
+	<% @horario.zona_id = @zona %>
+        <% @horario.tarde = @tarde %>
+
+        <select onchange="window.location.href = this.value">
+	    <option value="">Seleccione usuario</option>
+	    <% @personasasignables.each do |persona| %>
+   	    	<option value="/crearturnodatos?fecha=<%=@fecha%>&zona=<%=@zona.id%>&tarde=<%=@tarde%>&persona=<%=persona.id%>"><%=persona.nombre%></option>
+	    <%end%>
+	</select>
+
+
+
+<% end %>
+</br>
+

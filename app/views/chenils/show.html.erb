@@ -1,0 +1,106 @@
+<!--#####################################
+# Muestra la ficha de un chenil
+#   index->  zona.cheniles-> ###############################################
+#   -> añadir nota
+#   -> editar chenil
+#####################################-->
+
+
+<h1>Ficha chenil</h1>
+
+
+<% if ((current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && current_persona.zona_id == @chenil.zona_id) %> 
+
+     <nav class="botonera2">
+	<a class="boton2verde enlaceb"<%= link_to 'Editar', edit_chenil_path(@chenil) %></a>
+	<a class="boton2verde enlaceb"<%= link_to 'Eliminar', @chenil, confirm: 'Esta seguro de eliminar este chenil?', method: :delete %></a>
+     </nav>
+
+<% end %>
+<hr/>
+</br>
+
+<p>
+  <b>Chenil nº:</b>
+  <%= @chenil.numero %>
+</p>
+
+<p>
+  <b>Zona:</b>
+  <%= @chenil.zona.nombre %>
+</p>
+
+
+<p>
+  <b>Capacidad:</b>
+  <%= @chenil.capacidad %>
+
+  <%= "/" %>
+
+  <b>Espacio:</b>
+  <%= @chenil.caplibre %>
+</p>
+
+
+<hr/>
+<table class="tabla">
+<tr>
+ <% @contadoraux=0 %>
+ <% @animals.each do |animal| %>
+	<% if animal.chenil_id == @chenil.id %>	
+              <% if @contadoraux>5 %>
+                   <% @contadoraux=0 %>
+                   <tr class="modo1">
+              <% end %>
+              <td>
+	      <% if animal.foto_content_type.nil? %>
+   		 <center><%= link_to image_tag('logo.png'), animal %>
+                 </br>
+		 <%= link_to animal.nombre.from(0).to(18), animal %></center>
+   	      <% else %>
+    		 <center><%= link_to image_tag(animal.foto.url(:thumb)), animal %>
+                 </br>
+		 <%= link_to animal.nombre.from(0).to(18), animal %></center>
+  	      <%end%>
+	      </td>
+              <% @contadoraux = @contadoraux+1 %>
+        <% end %>
+ <%end%>
+</tr>
+</table>
+<hr/>
+
+
+<p>
+  <nav class="botonera2">
+
+     <%= link_to 'añadir nota nueva', {:action => "add_nota", :id=> @chenil.id}, :class=>"boton2der" %>
+  </nav>
+</p>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Notas:</b>     
+    </br>
+      <%= simple_format h @chenil.notas %>
+</p>
+</div>
+</br></br>
+
+
+<div class="roundB">
+<p>
+  <b>Informacion:</b>
+    </br>
+      <%= simple_format h @chenil.Informacion %>
+</p>
+</div>
+</br></br></br>
+
+<nav class="links_bajo">
+  <span style="float:right">  
+     <%= link_to 'Listado cheniles', :action=> "cheniles", :controller=> "zonas", :id=> @chenil.zona_id %>
+  </span>
+</nav>
+

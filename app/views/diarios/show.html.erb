@@ -1,0 +1,174 @@
+<!--#####################################
+  # Muestra información de un día
+  #   HORARIOS->
+  #   -> add_informe, adittareadia, edit
+  #   -> ZONAS.editar_tareas
+#######################################-->
+
+<h1>Información del día</h1>
+<hr/>
+</br>
+
+
+<table class="tabla">
+ <tr class="letragrande">
+  <td><p>
+    <b>Zona:</b>
+    <%= @zona.nombre %>
+  </p></td>
+
+  <td><p>
+    <b>Fecha:</b>
+    <%= @diario.fecha.strftime("%d-%m-%Y") %>
+  </p></td>
+ </tr>
+</table>
+
+
+<!------------------------------------
+Cambio zona: tareas, informes (dia)
+-------------------------------------->
+<% if @Ocu== 1 || @Ocu==3 || @Ocu==4 || @Ocu==5 %>
+  <select onchange="window.location.href = this.value">
+    <option value="">Zona</option>
+    <% @zonas.each do |zona| %>
+      <option value="/diarios/show?fecha=<%=@dia%>&zona=<%=zona.id%>"><%=zona.nombre%></option>
+    <%end%>
+  </select>
+<% end %>
+</br>
+</br>
+
+<!-------------------------------------------------------------------------------->
+<!--EDITAR INFORMES-->
+<% if (@zona.id!=11 && @zona.id!=1 && @zona.id!=14) %>
+  <% if ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3 ) && (current_persona.zona_id == @diario.zona_id))%>
+
+    <% if @diario.fecha >= @hoy-1 %>
+       <p>
+       <nav class="botonera3">
+          <a href="<%=@diario.id%>/edit" class="boton2verde enlaceb">Editar Informe</a>
+          <a href="/add_informe?id=<%=@diario.id%>" class="boton2">Añadir Informe</a>
+    <% else %>
+       <p>
+       <nav class="botonerapequeña">
+          <a href="<%=@diario.id%>/edit" class="boton2verdeder enlaceb">Editar Informes</a>
+    <% end %>
+    </nav>
+    </p>
+
+  <% else %>
+
+    <!--voluntario y su zona O cualquier ocupacion distinta de 2 Y fecha >= ayer-->
+    <% if ((@persona.ocupacion_id==2 && @persona.zona_id==@diario.zona_id) || (!@persona.ocupacion_id.nil? && @persona.ocupacion_id!=2)) && @diario.fecha >=@hoy-1 %>
+      <p>
+      <nav class="botonera2">
+         <a href="/add_informe?id=<%=@diario.id%>" class="boton2der">Añadir Informe</a>
+      </nav>
+      </p>
+    <% end %>
+
+  <% end %>
+</br>
+
+
+
+  <div class="roundB">
+  <ul><p>
+    <b>Informe Mañana:</b></br>
+    <b>----------------------</b>
+
+    <% if !@diario.informe.nil? && !@diario.informe.empty? %>
+      <%= markdown @diario.informe %>
+    <% else %>
+      <%= simple_format h @diario.informe %>
+    <% end %>
+  </p></ul>
+  </br></br>
+
+
+  <!--si dia unificado no mostrar informes tarde (no existen)-->
+  <% if @diario.unificado.nil? || @diario.unificado!=1 %>
+    <ul>
+    <p>
+      <b>Informe Tarde:</b>
+      </br>
+      <b>----------------------</b>
+      <% if !@diario.informet.nil? && !@diario.informet.empty? %>
+        <%= markdown @diario.informet %>
+      <% else %>
+        <%= simple_format h @diario.informet %>
+      <% end %>
+    </p>
+    </ul>
+  <% end %>
+  </div></br></br>
+<% end %>
+<!--/Editar Informes-->
+
+
+
+<!--Tareas dia-->
+
+<!--Si dia unificado no mostrar tareas del dia ni generales-->
+<% if @diario.unificado.nil? || @diario.unificado!=1 %>
+
+  <% if ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3 ) && (current_persona.zona_id == @diario.zona_id || @zona.id==11 || @zona.id==1))%>
+   <p><nav class="botonera2">
+      <a href="/edittareadia?id=<%=@diario.id%>" class="boton2verdeder enlaceb">Editar tareas del dia</a>
+   </nav></p>
+  <% end %>
+  </br>
+
+  <div class="roundB">
+    <ul><p> 
+    <b>Tareas dia:</b>    
+    </br>
+    <% if !@diario.tareasdia.nil? && !@diario.tareasdia.empty? %>
+      <%= markdown @diario.tareasdia %>
+    <% else %>
+      <%= simple_format h @diario.tareasdia %>
+    <% end %>
+    </p></ul>
+ 
+  </div></br></br>
+
+
+<!--Tareas generales-->
+   <% if ((current_persona.ocupacion_id==1 || current_persona.ocupacion_id==3 ) && (current_persona.zona_id == @diario.zona_id || @zona.id==11 || @zona.id==1))%>
+       <p>
+       <nav class="botonera2">
+           <a href="/editar_tareas?zona=<%=@zona.id%>" class="boton2verdeder enlaceb">Editar tareas Zona</a>
+       </nav>
+       </p>
+   <% end %>
+   </br>
+
+   <% if !@zona.tareas.nil? && !@zona.tareas.empty? %>
+     <div class="roundB">
+     <ul><p>
+       <b>Tareas Zona:</b>
+       <%= markdown @zona.tareas %>
+     </p></ul>
+     </div>
+
+   <% else %>
+     <div class="roundB">
+     <ul><p>
+       <b>Tareas Zona:</b>
+       <%= simple_format h @zona.tareas %>
+     </p></ul>
+     </div>
+
+   <% end %>
+
+
+<% end %>
+
+</br></br></br>
+
+<nav class="links_bajo">
+  <span style="float:right">  
+    <a href="/horarios?month=<%=$fecha%>&zona=<%=@zona.id%>">Calendario</a>
+  </span>
+</nav>

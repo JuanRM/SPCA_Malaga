@@ -1,0 +1,170 @@
+<!--#####################################
+# Muestra la ficha de un animal
+#   index->
+#   ordenado->
+#   -> editar, mover, eliminar, relaciones
+#   -> añadir nota
+#######################################-->
+
+<h1>Ficha animal</h1>
+
+<table class="tabla">
+
+  <nav class="botoneragrande">
+   <!--MOVER solo coordinador o veterinario animales de su módulo-->
+   <!--coordinador desde zona libre movimiento a su módulo-->
+   <% if ((current_persona.ocupacion_id == 3 || current_persona.ocupacion_id == 1)  && (@animal.zona_id == current_persona.zona_id)) %>
+
+     <a href="/mover?id1=<%=@animal.zona_id%>&id2=<%=@animal.id%>" class="boton2verde enlaceb">Mover</a>
+     <a href="<%=@animal.id%>/edit" class="boton2verde enlaceb">Editar</a>
+     <a class="boton2verde enlaceb"<%= link_to 'Eliminar', @animal, confirm: '¿Esta seguro?', method: :delete %></a>
+   <%else%>
+      <%if current_persona.ocupacion_id==3%>
+         <a href="/moveraMiZona?id=<%=@animal.id%>" class="boton2verde enlaceb">Mover</a>
+      <% end %>
+   <% end %>
+
+   <!--Coord/Vet mover desde zona de libre movimiento-->
+   <% if ((current_persona.ocupacion_id == 3 || current_persona.ocupacion_id == 1)  && (@animal.zona_id != current_persona.zona_id) && @animal.zona.libremovimiento==1) %>
+     <a href="/moveraMiZona?id=<%=@animal.id%>" class="boton2verde enlaceb">Mover</a>
+     <% if current_persona.ocupacion_id==3 %> 
+        <a href="<%=@animal.id%>/edit" class="boton2verde enlaceb">Editar</a>
+     <% end %>
+   <% end %>
+
+   <!--si VETERINARIO y animal no de su zona y no zona libre movimiento: permiso de EDITAR info veterinario-->
+   <!--Veterinario puede mover animal desde cualquier zona a zona veterinario-->
+   <% if (current_persona.ocupacion_id == 3  && (@animal.zona_id != current_persona.zona_id && @animal.zona.libremovimiento!=1)) %>
+     <a href="<%=@animal.id%>/edit" class="boton2verde enlaceb">Editar</a>
+   <% end %>
+
+   <!--todos los usuarios pueden ver las relaciones de una animal-->
+   <a href="/relacionesXanimal/<%=@animal.id%>" class="boton1verde">Relaciones</a>
+  
+  </nav>
+</table>
+
+<hr/>
+
+</br>
+
+<% if !@animal.foto_content_type.nil? %>
+<p>
+  <% if !@animal.foto.url(:medium).empty? %>
+     <%= image_tag @animal.foto.url(:medium) %>
+  <% else %>
+     <%= image_tag @animal.foto.url(:original) %>
+  <% end %>     
+</p>
+<%end%>
+
+<table class="tabla">
+
+ <tr class="letragrande">
+ <td>
+   <p>
+     <b>Nombre:</b>
+     <%= @animal.nombre %>
+   </p>
+ </td>
+
+ <td>
+   <p>
+     <b>Zona:</b>
+     <% if !(@animal.zona_id.nil?) %> 	
+       <%= link_to @animal.zona.nombre, :controller=>"zonas", :action=> "cheniles", :id=> @animal.zona_id %> 
+
+     <%end%>
+   </p>
+ </td>
+
+ <td>
+   <p>
+     <b>Chenil:</b>
+     <% if !(@animal.chenil_id.nil?) %> 	
+       <%= link_to @animal.chenil.numero, @animal.chenil %>
+     <%end%>
+   </p>
+ </td>
+ </tr>
+
+ <tr class="letragrande"><td>
+   <p>
+     <b>Especie:</b>
+     <% if !@animal.especie.nil? %>
+        <%= @animal.especie.nombre %>
+     <% end %>
+   </p>
+ </td>
+
+ <td>
+   <p>
+     <b>Raza:</b>
+     <%= @animal.raza %>
+   </p>
+ </td>
+
+ <td>
+   <p>
+     <b>Sexo:</b>
+     <%= @animal.sexo %>
+   </p>
+ </td>
+ </tr>
+
+
+ <tr class="letragrande">
+ <td>
+   <p>
+     <b>Fecha entrada:</b>
+     <%= @animal.created_at.to_date %>
+   </p>
+ </td>
+ 
+ <td>
+   <p>
+     <b>Fecha modificacion:</b>
+     <%= @animal.updated_at.to_date %>
+   </p>
+ </td>
+ </tr>
+
+</table>
+
+
+<p>
+  <nav class="botonera2">
+     <%= link_to 'añadir nota nueva', {:action => "add_nota", :id=> @animal.id}, :class=>"boton2der" %>
+  </nav>
+</p>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Notas:</b>
+  <%= simple_format h @animal.notas %>
+</p>
+</div>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Observaciones:</b>
+  <%= simple_format h @animal.observaciones %>
+</p>
+</div>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Veterinario:</b>
+  <%= simple_format h @animal.veterinario %>
+</p>
+</div>
+
+</br></br></br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Listado animales', animals_path %>
+  </span>
+</nav>

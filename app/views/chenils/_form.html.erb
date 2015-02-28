@@ -1,0 +1,53 @@
+<!--#####################################
+# recoge datos para "new"
+#  new->
+#####################################-->
+
+
+<h1></h1>
+<hr/>
+
+<%= form_for(@chenil) do |f| %>
+  <% if @chenil.errors.any? %>
+    <div id="error_explanation">
+      <% flash[:error] = "Chenil no pudo ser creado correctamente" %>
+      <!--h2>< pluralize(@chenil.errors.count, "error") %> este chenil no pudo ser guardado:</h2-->
+
+      <ul>
+      <% @chenil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+</br>
+</br>
+
+  <div class="field">
+    <%= f.label :"Numero chenil" %><br />
+    <%= f.number_field :numero %>
+  </div>
+
+  <div class="field">
+    <%= f.label :capacidad %><br />
+    <%= f.number_field :capacidad %>
+  </div>
+
+</br>
+
+  <div class="field">
+    <%= f.label :notas %><br />
+    <%= f.text_area :notas, :style => "width:100%" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Informacion %><br />
+    <%= f.text_area :Informacion %>
+  </div>
+
+  </br>
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>

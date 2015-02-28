@@ -1,0 +1,29 @@
+<h1>Listing ocupacions</h1>
+
+<% if current_persona.ocupacion_id == 1 %>
+    <%= link_to 'Nueva ocupacion', new_ocupacion_path %>
+<% end %>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ocupacions.each do |ocupacion| %>
+  <tr>
+    <td><%= ocupacion.nombre %></td>
+    <td><%= link_to 'Show', ocupacion %></td>
+<% if current_persona.ocupacion_id == 1 %>
+    <td><%= link_to 'Edit', edit_ocupacion_path(ocupacion) %></td>
+    <td><%= link_to 'Destroy', ocupacion, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+

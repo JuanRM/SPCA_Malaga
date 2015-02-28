@@ -1,0 +1,102 @@
+<!--#####################################
+# Llamado por edit
+# -> update
+#######################################-->
+
+
+<h1></h1>
+
+<%= form_for @animal, :html => { :multipart =>true } do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<hr/>
+
+  <% if ((current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && (@animal.zona_id==current_persona.zona_id)) %>
+
+  <table class="tabla"> 
+
+    <tr class="letragrande">
+    <td>
+      <div class="field">
+        <%= f.label :nombre %><br />
+        <%= f.text_field :nombre %>
+      </div>
+    </td>
+
+    <td>
+       <%= f.label :especie %><br />
+       <select name="animal[especie_id]"> 
+       <% @especies.each do |especie| %> 
+          <option value="<%= especie.id %>" 
+            <%= 'selected' if especie.id == @animal.especie_id %>>
+            <%= especie.nombre %> 
+          </option> 
+       <% end %> 
+       </select>
+       <%= link_to " - Añadir Especie nueva", especies_path %>
+    </td>
+    </tr>
+
+    <tr class="letragrande">
+    <td>
+      <div class="field">
+        <%= f.label :raza %><br />
+        <%= f.text_field :raza %>
+      </div>
+    </td>
+
+    <td>
+      <div class="field">
+         <%= f.label :Sexo %><br />
+         <%= f.select :sexo, ["neutro", "macho", "hembra"] %>
+      </div>
+    </td>
+    </tr>
+
+  </table>
+
+
+  <div class="field">
+    <%= f.label :Foto %><br />
+    <%= f.file_field :foto %>
+  </div>
+  </br> 
+  <hr/>
+
+  <div class="field">
+    <%= f.label :notas %><br />
+    <%= f.text_area :notas %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :observaciones %><br />
+    <%= f.text_area :observaciones %>
+  </div>
+
+  <% end %>
+
+  <% if current_persona.ocupacion_id==3 %>
+    <div class="field">
+      <%= f.label :veterinario %><br />
+      <%= f.text_area :veterinario %>
+    </div>
+  <% end %>
+ 
+  </br>
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+
+<% end %>

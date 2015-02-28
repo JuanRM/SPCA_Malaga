@@ -1,0 +1,46 @@
+<!--#####################################
+  # Listado de especies existentes
+  # ANIMAL.new ->
+  # ANIMAL.edit -> 
+  # -> new, edit, destroy
+#######################################-->
+
+<h1>Especies</h1>
+
+
+<% if current_persona.ocupacion_id == 1 %> 
+   <nav class="botonera2">
+	<%= link_to 'Crear especie nueva', new_especy_path, :class=>"boton2verde enlaceb" %>
+        </p>
+   </nav>
+<% end %> 
+</br>
+
+<hr/>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+  </tr>
+  <% for especie in @especies %>
+     
+     <tr>
+       <td><%= especie.nombre %></td>
+       <td><%= link_to "Editar", edit_especy_path(especie) %></td>
+       <td><%= link_to "Eliminar", especie, :confirm => '¿Esta seguro?', :method => :delete %></td>
+     </tr>
+  <% end %>
+</table>
+
+
+</br>
+</br>
+
+
+<nav class="links_bajo">
+  <span style="float:right">  
+      <p><%= link_to "Volver listado animales", animals_path %></p>
+  </span>
+</nav>
+
+

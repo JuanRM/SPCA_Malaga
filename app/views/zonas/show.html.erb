@@ -1,0 +1,103 @@
+<!--#####################################
+# Muestra la ficha de una zona
+#   index->
+#   -> añadir nota
+#   -> editar zona
+#   -> editar tareas
+    #####################################-->
+
+<h1>Ficha Zona</h1>
+
+
+<table class="tabla">
+
+<!-- enlace a editar zona -->
+<% if ((@Ocu == 1 || @Ocu == 3) && (current_persona.zona_id==@zona.id || @zona.id==1 || @zona.id==11 || @zona.id==14 )) %>
+  <nav class="botonerapequeña">
+    <a href="<%=@zona.id%>/edit" class="boton2verde enlaceb">Editar</a>
+  </nav>
+  </p>
+<% end %>
+<hr/>
+
+
+<tr>
+</br>
+<p>
+  <b>Nombre:</b>
+  <%= @zona.nombre %>
+</p>
+</br>
+
+<!-- cambio de zona -->
+<% if @Ocu== 1 || @Ocu==3 || @Ocu==4 || @Ocu==5 || 7 %>
+  <select onchange="window.location.href = this.value">
+    <option value="">Cambiar zona</option>
+    <% @zonas.each do |zona| %>
+      <option value="/zonas/<%=zona.id%>"><%=zona.nombre%></option>
+
+    <%end%>
+  </select>
+<% end %>
+</br>
+</br>
+
+<!-- enlace a editar tareas generales de la zona -->
+<% if ((@Ocu == 1 || @Ocu==3) && (current_persona.zona_id==@zona.id || @zona.id==1 || @zona.id==11 || @zona.id==14)) %>
+  <nav class="botonerapequeña">
+    <a href="/editar_tareas?zona=<%=@zona.id%>" class="boton2verdeder enlaceb">  Editar tareas  </a>
+  </nav>
+  </p>
+<% end %>
+
+<div class="roundB">
+<p>
+  <b>Tareas:</b>
+  <% if (!@zona.tareas.nil? && !@zona.tareas.empty?) %>
+     <%= markdown @zona.tareas %>
+  <% else %>
+     <%= simple_format h @zona.tareas %>
+  <% end %>
+</p>
+</div>
+</br>
+
+<!-- enlace a añadir nota -->
+<p>
+  <nav class="botonera2">
+     <%= link_to 'añadir nota nueva', {:action => "add_nota", :id=> @zona.id}, :class=>"boton2der" %>
+  </nav>
+</p>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Notas:</b>
+  <%= simple_format h @zona.notas %>
+</p>
+</div>
+</br>
+
+<div class="roundB">
+<p>
+  <b>Infomación:</b>
+  <%= simple_format h @zona.text %>
+</p>
+</div>
+</tr>
+</table>
+</br></br>
+
+<nav class="links_bajo">
+  <span style="float:right">  
+    <% if @Ocu!=7 %>
+      <%= link_to 'Listado Zonas', zonas_path %>
+   <% else %>
+      <%= link_to 'Administracion Zonas', {:action => "administracionzonas"} %>
+   <% end %>
+  </span>
+</nav>
+
+
+
+

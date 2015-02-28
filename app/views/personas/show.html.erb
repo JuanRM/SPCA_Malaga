@@ -1,0 +1,117 @@
+<!--#####################################
+# Muestra la ficha de una persona
+#   index->
+#   -> editar
+#######################################-->
+
+<h1>Ficha persona</h1>
+
+
+<!--Si ficha propietario de la ficha O 
+persona administrador O 
+(persona coordinador o veterinario y ficha de voluntario, auxiliar de su zona) -->
+<% if (current_persona.id == @persona.id || current_persona.ocupacion_id==7 || ((current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && (@persona.ocupacion_id==2 || @persona.ocupacion_id==4) && @persona.zona_id==current_persona.zona_id)) %>   
+
+  <nav class="botonera2">
+    <a href="<%=@persona.id%>/edit" class="boton2verde enlaceb">Editar</a>
+    <% if (current_persona.ocupacion_id == 7 || ((current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && (@persona.ocupacion_id==2 || @persona.ocupacion_id==4) && @persona.zona_id==current_persona.zona_id)) %>
+<!--&& @persona.ocupacion_id!=7 %-->
+        <a class="boton2verde enlaceb"<%= link_to 'Eliminar', @persona, confirm: '¿Estas seguro de eliminar este usuario?', method: :delete %></a>
+    <% end %>
+  </nav>
+  </p>
+
+<!--este else aqui no hace nada-->
+<%else%>
+  </br>
+
+<% end %>
+<hr/>
+</br>
+
+
+<b>Nombre:</b>
+    <%= @persona.nombre %>
+</br>
+</br>
+
+
+<table class="tabla">  
+  
+  <tr class="letragrande">
+
+   <td>
+     <p>
+     <b>Correo:</b></br>
+     <%= @persona.email %>
+     </p>
+   </td>
+
+   <td>
+     <b>Ocupación:</b></br>
+     <% if !@persona.ocupacion_id.nil? %>
+        <p><%= @persona.ocupacion.nombre %></p>
+     <% end %>
+   <td>
+
+
+
+
+  <% if !@persona.zona_id.nil? && @persona.ocupacion!=7 %>
+
+    <td>
+      <p>
+      <b>Zona:</b></br>
+      <%= @persona.zona.try(:nombre) %>
+      </p>
+    </td>
+
+
+  <%end%>
+
+  </tr>
+
+</table> 
+
+
+<div class="roundB">
+  <ul>
+  <p>
+    <b>Información pública:</b>
+    <%= simple_format h @persona.publico %>
+  </p>
+  </ul>
+</div>
+</br>
+
+
+<!--Informacion privada solo visible por coordinadores, veterinarios o administrador-->
+<% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3 || current_persona.ocupacion_id == 7) %>   
+
+  </br>
+  <b><%= " - Visible solo para coordinador, veterinario y administrador" %></b>
+  <hr/>
+  
+  <div class="roundB">
+    <ul>
+    <p>
+      <b>Información privada: </b>
+      <%= simple_format h @persona.privado %>
+    </p> 
+    </ul>
+  </div>
+
+<% end %>
+
+</br>
+</br>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Listado Personal', personas_path %>
+  </span>
+</nav>
+
+
+</tr>

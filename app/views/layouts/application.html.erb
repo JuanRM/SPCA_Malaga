@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+ <= stylesheet_link_tag :all %>
+ <= javascript_include_tag :defaults %>
+ <= csrf_meta_tag %>
+
+
+  <= stylesheet_link_tag "depot" %>
+  <= stylesheet_link_tag "depot", :media => "all" %>
+  <= javascript_include_tag "depot" %>
+
+ <= stylesheet_link_tag "scaffolds" %>
+ <= stylesheet_link_tag "depot", :media => "all" %>
+-->
+
+<head>
+	<%= javascript_include_tag "application" %>
+        <%= javascript_include_tag 'nicEdit' %>
+	<%= csrf_meta_tags %>
+	<title>Protectora Animales | <%= @title %></title>
+	<%= render 'layouts/stylesheets' %>
+
+</head>
+
+  <body>
+     <!--div style='position: fixed; top: 0; left: 0; width: 100%; height: 320px; background-color: yellow; z-index: 1;'></div-->
+
+     <%= render 'layouts/header' %>
+     <%= render 'layouts/menu'%>
+     <div class="container">
+        <section class="round">
+          <% flash.each do |key, value| %>
+	     <div class="flash <%= key %>"><%= value %></div>
+          <% end %>
+	     <%= yield %>
+        </section>
+     </div>
+     <%= render 'layouts/footer' %>
+  </body>
+
+</html>
+
+

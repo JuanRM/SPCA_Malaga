@@ -1,0 +1,73 @@
+<!--#####################################
+# Listado de zonas existentes
+# menu-> 
+# -> ficha
+# -> cheniles
+#####################################-->
+
+<h1>Listado Zonas</h1>
+<hr/>
+
+
+<center>
+<table class="tabla">
+
+<tr>
+    <th>Nombre</th>
+    <th>Notas</th>
+    <th>Informacion</th>
+    <th></th>
+    <th></th>
+</tr>
+
+
+<!--deja fuera zonas: veterinario, limpiador, externo e intercambio-->
+<% @zonas.each do |zona| %>
+  <% if zona.id >2 && zona.id != 11 && zona.id != 14  %>
+  <tr>
+    <td><%= zona.nombre %></td>
+    <% if !zona.notas.nil? && !zona.notas.empty? %>
+      <td><%= link_to 'Notas', zona %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <% if !zona.text.nil? && !zona.text.empty? %>
+      <td><%= link_to 'Información', zona %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <td><%= link_to 'Ficha', zona %></td>
+    <td><%= link_to 'Cheniles', :action=> "cheniles", :id=> zona.id %></td> 
+  </tr>
+  <%end%>
+<% end %>
+
+
+
+<!--muestra zonas: veterinario, externo e intercambio-->
+<% @zonas.each do |zona| %>
+  <% if zona.id<=2 || zona.id==14  %>
+  <tr>
+    <td><%= zona.nombre %></td>
+    <% if !zona.notas.nil? && !zona.notas.empty? %>
+      <td><%= link_to 'Notas', zona %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <% if !zona.text.nil? && !zona.text.empty? %>
+      <td><%= link_to 'Información', zona %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <td><%= link_to 'Ficha', zona %></td>
+    <td><%= link_to 'Cheniles', :action=> "cheniles", :id=> zona.id %></td> 
+  </tr>
+  <%end%>
+<% end %>
+
+</table>
+</center>
+
+<br />
+
+

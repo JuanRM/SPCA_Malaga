@@ -1,0 +1,36 @@
+<!--#####################################
+  # Llamado por edit, new
+  # -> update
+  # -> create
+#######################################-->
+
+<h1></h1>
+
+<%= form_for @especie do |f| %>
+  <% if @especie.errors.any? %>
+    <div id="error_explanation">
+      <% flash[:error] = "Especie nueva no pudo ser creada correctamente" %>
+
+      <ul>
+      <% @especie.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+</br>
+</br >
+
+  <p>
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </p>
+
+</br>
+  <div class="actions">
+    <%= f.submit "Guardar Especie" %>
+  </div>
+
+<% end %>

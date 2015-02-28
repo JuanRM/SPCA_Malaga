@@ -1,0 +1,81 @@
+<!--#####################################
+  # Muestra relación existente entre dos animales
+  #   edit->
+  #   -> edit
+  #   -> eliminar
+#######################################-->
+
+<h1>Relación</h1>
+
+<% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) %>
+  <nav class="botonera2">
+    <a href="<%=@relacion_animal.id%>/edit" class="boton2verde enlaceb">Editar</a>
+    <a class="boton2verde enlaceb"<%= link_to 'Eliminar', @relacion_animal, confirm: '¿Esta seguro?', method: :delete %></a>
+  </nav>
+  </p>    
+<% end %>
+<hr/>
+</br>
+
+<!----------------------------------------------------------------------->
+<table class="tabla">
+  <tr>
+    <th>Zona</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+
+    <th>Zona</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+  <tr class="modo1">
+    <td><%= @relacion_animal.animal.chenil.zona.nombre %>
+    <% if @relacion_animal.animal.foto_content_type.nil? %>
+       <td><%= link_to image_tag('logo.png'), @relacion_animal.animal %></td>
+    <% else %>
+       <td><%= link_to image_tag(@relacion_animal.animal.foto.url(:thumb)), @relacion_animal.animal %></td>
+    <%end%>
+
+    <td><%= @relacion_animal.animal.nombre %></td>
+
+    <td><%= @relacion_animal.animal2.zona.nombre %></td>
+    <td>
+    <% if @relacion_animal.animal2.foto_content_type.nil? %>
+       <%= link_to image_tag('logo.png'), @relacion_animal.animal2 %>
+    <% else %>
+       <%= link_to image_tag(@relacion_animal.animal2.foto.url(:thumb)), @relacion_animal.animal2 %>
+    <%end%>
+    </td>
+
+    <td><%= @relacion_animal.animal2.nombre %></td>
+  
+    <td><%= @relacion_animal.relacion %></td>
+
+  </tr>
+
+</table>
+<br />
+
+
+</br>
+</br>
+<p>
+  <b>Relacion:</b>
+  <%= @relacion_animal.relacion %>
+</p>
+
+
+
+<nav class="links_bajo">
+  <span style="float:right">  
+     <%= link_to 'Listado animales', animals_path %>
+  </span>
+</nav>
+

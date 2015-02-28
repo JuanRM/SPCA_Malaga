@@ -1,0 +1,68 @@
+<!--#####################################
+ # Añade una nota a un animal 
+ #  show->
+#######################################-->
+
+<h1>Añadir nota</h1>
+<hr/>
+</br>
+
+<% if !@animal.foto_content_type.nil? %>
+<p>
+  <%= image_tag @animal.foto.url(:original) %>
+</p>
+<%end%>
+
+<p>
+  <b>Nombre:</b>
+  <%= @animal.nombre %>
+</p>
+
+<p>
+  <b>Raza:</b>
+  <%= @animal.raza %>
+</p>
+
+
+
+<div class="roundB">
+<ul>
+<p>
+  <b>Notas:</b>
+  <%= simple_format h @animal.notas %>
+</p>
+</ul>
+</div>
+</br>
+
+<%= form_for(@animal) do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :"añadir nota nueva: " %><br >
+    <%= f.text_area :nuevoNA %>
+  </div>
+  </br>
+
+  <div class="actions">
+    <%= f.submit "Añadir Nota" %>
+  </div>
+<% end %>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Atras', @animal %>
+  </span>
+</nav>

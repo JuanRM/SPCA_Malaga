@@ -1,0 +1,64 @@
+<!--#####################################
+# Añade una nota nueva
+#   guarda fecha y nombre de usuario
+#   show->
+    #####################################-->
+
+<h1>Añadir nota nueva</h1>
+<hr/>
+</br>
+
+<p>
+  <b>chenil:</b>
+  <%= @chenil.numero %>
+</p>
+
+<p>
+  <b>zona:</b>
+  <%= @chenil.zona.nombre %>
+</p>
+
+</br>
+<div class="roundB">
+<ul>
+<p>
+  <b>Notas:</b>
+
+  <%= simple_format h @chenil.notas %>
+</p>
+</ul>
+</div>
+
+<%= form_for(@chenil) do |f| %>
+  <% if @chenil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chenil.errors.count, "error") %> prohibited this chenil from being saved:</h2>
+
+      <ul>
+      <% @chenil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  </br> 
+  <b>Nota nueva:</b>
+
+  <div class="field">
+    <%= f.text_area :nuevoNC %>
+  </div>
+  </br>
+
+  <div class="actions">
+    <%= f.submit "Añadir nota" %>
+  </div>
+<% end %>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Ficha', @chenil %> |
+	<%= link_to 'Listado cheniles', :action=> "cheniles", :controller=> "zonas", :id=> @chenil.zona_id %> 
+  </span>
+</nav>

@@ -1,0 +1,70 @@
+<!--#####################################
+# Edita información de un chenil
+#  show->
+#####################################-->
+
+<h1>Editar chenil</h1>
+<hr/>
+
+
+<%= form_for(@chenil) do |f| %>
+  <% if @chenil.errors.any? %>
+    <div id="error_explanation">
+      <% flash[:error] = "Este chenil no pudo ser modificado." %>
+
+
+      <ul>
+      <% @chenil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+</br>
+
+
+
+<!------------------------------------------>
+
+  <div class="field">
+    <%= f.label :"Numero chenil" %><br />
+    <%= f.number_field :numero %>
+  </div>
+
+  <div class="field">
+    <%= f.label :capacidad %><br />
+    <%= f.number_field :capacidad %>
+  </div>
+  </br>
+
+<!------------------------------------------>
+
+
+
+  <div class="field">
+    <%= f.label :notas %><br />
+    <%= f.text_area :notas %>
+  </div>
+  </br>
+
+  <div class="field">
+    <%= f.label :Informacion %><br />
+    <%= f.text_area :Informacion %>
+  </div>
+
+  </br>
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>
+
+
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Ficha', @chenil %> |
+	<%= link_to 'Listado cheniles', :action=> "cheniles", :controller=> "zonas", :id=> @chenil.zona_id %> 
+  </span>
+</nav>

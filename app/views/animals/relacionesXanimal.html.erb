@@ -1,0 +1,151 @@
+<!--#####################################
+ # Muestra las relaciones existentes entre un animal y sus compañeros
+ #  show->
+ #  VISTA COMO EN MOVER X CHENILES??
+#######################################-->
+
+<h1>Relaciones <%= @animal.nombre %></h1>
+
+
+
+<% if !current_persona.nil? && (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id ==3) && @animal.zona_id==current_persona.zona_id %>
+
+  <nav class="botonera2">
+    <a href="/relaciones/<%=@animal.id%>" class="boton2verde enlaceb">Crear Nueva Relacion</a>
+  </nav>
+  </p>    
+
+<% end %>
+
+<hr/>
+
+<center>
+<table class="tabla">
+  <tr>
+
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Zona</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+
+
+    <% if @animal.foto_content_type.nil? %>
+       <td><%= link_to image_tag('logo.png'), @animal %></td>
+    <% else %>
+       <td><%= link_to image_tag(@animal.foto.url(:thumb)), @animal %></td>
+    <%end%>
+
+    <td><%= @animal.nombre %></td>
+    <td><%= @animal.chenil.zona.nombre %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</center>
+<hr/>
+
+<center>
+<table class="tabla">
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Zona animal</th>
+
+
+
+    <th>Relacion</th>
+<% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) %>
+    <th></th>
+    <th></th>
+<%end%>
+  </tr>
+
+
+
+ <% @relacionplus.each do |relacion_animal| %>
+
+  <!--borrado relaciones sin algun animal-->
+  <% if relacion_animal.animal.nil? || relacion_animal.animal2.nil? %>
+	<% relacion_animal.destroy %>
+  <% else %>
+
+  <% if ( @animal.id == relacion_animal.animal2_id) %> 
+ 
+
+	  <tr>
+	   <td>
+           <% if @animal.foto_content_type.nil? %>
+           <!-- if relacion_animal.animal.foto_content_type.nil? %-->
+              <%= link_to image_tag('logo.png'), relacion_animal.animal %>
+           <% else %>
+              <%= link_to image_tag(relacion_animal.animal.foto.url(:thumb)), relacion_animal.animal %>
+           <%end%>
+           </td>
+
+	   <td><%= relacion_animal.animal.nombre %></td>
+	   <td><%= relacion_animal.animal.chenil.zona.nombre %>
+
+
+	   <td><%= relacion_animal.relacion %></td>
+  
+           <% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && (relacion_animal.animal.zona_id == current_persona.zona_id ||relacion_animal.animal2.zona_id == current_persona.zona_id)  %>
+               <td><%= link_to 'Editar', edit_relacion_animal_path(relacion_animal) %></td>
+	       <td><%= link_to 'Eliminar', relacion_animal, confirm: '¿Esta seguro?', method: :delete %></td>
+	   <% else %>
+	       <td></td>
+	       <td></td>
+	   <% end %>
+	  </tr>
+
+  <%end%>
+
+  <% if @animal.id == relacion_animal.animal1_id %>
+	  <tr>
+
+           <td>
+           <% if relacion_animal.animal2.foto_content_type.nil? %>
+                  <%= link_to image_tag('logo.png'), relacion_animal.animal2 %></td>
+           <% else %>
+                  <%= link_to image_tag(relacion_animal.animal2.foto.url(:thumb)), relacion_animal.animal2 %>
+
+           <%end%>
+           </td>
+
+	    <td><%= relacion_animal.animal2.nombre %></td>
+	    <td><%= relacion_animal.animal2.chenil.zona.nombre %>
+
+
+	    <td><%= relacion_animal.relacion %></td>
+
+            <% if (current_persona.ocupacion_id == 1 || current_persona.ocupacion_id == 3) && (relacion_animal.animal2.zona_id==current_persona.zona_id || relacion_animal.animal.zona_id == current_persona.zona_id)  %>
+	       <td><%= link_to 'Editar', edit_relacion_animal_path(relacion_animal) %></td>
+	       <td><%= link_to 'Eliminar', relacion_animal, confirm: '¿Esta seguro?', method: :delete %></td>
+            <%else%>
+	       <td></td>
+	       <td></td>
+	    <%end%>
+	  </tr>
+
+
+  <%end%>
+ <%end%>
+ <% end %>
+</table>
+</center>
+
+
+</br></br></br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Ficha', @animal %> |
+        <%= link_to 'Listado animales', animals_path %>
+  </span>
+</nav>
+
+
+

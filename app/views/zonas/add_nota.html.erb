@@ -1,0 +1,59 @@
+<!--#####################################
+# Añade una nota nueva
+#   guarda fecha y nombre de usuario
+#   show->
+    #####################################-->
+
+<h1>Añadir nota nueva</h1>
+
+<hr/>
+</br>
+
+
+<p>
+  <b>Nombre:</b>
+  <%= @zona.nombre %>
+</p>
+
+
+<div class="roundB">
+<ul>
+<p>
+  <b>Notas:</b>
+  <%= simple_format h @zona.notas %>
+</p>
+</ul>
+</div>
+
+<%= form_for(@zona) do |f| %>
+  <% if @zona.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@zona.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @zona.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  </br>
+  <b>Nota nueva:</b>
+
+  <div class="field">
+    <%= f.text_area :nuevoNZ %>
+  </div>
+
+  </br>
+  <div class="actions">
+    <%= f.submit "Añadir nota" %>
+  </div>
+<% end %>
+
+</br>
+<nav class="links_bajo">
+  <span style="float:right">  
+	<%= link_to 'Ficha', @zona %> 
+  </span>
+</nav>
