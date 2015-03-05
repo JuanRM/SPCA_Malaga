@@ -19,7 +19,7 @@ contained in:
     Kennels: Shared by animals, capacity control.
     Animals: sex, race, species, observations ..
 
--Permission management in order to the area and occupation 
+-Permission management according to the area and occupation 
 assigned: Cleaners, Veterinarians, Coordinators, Volunteers and 
 Administrator.
 
