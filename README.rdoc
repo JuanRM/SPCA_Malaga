@@ -38,16 +38,21 @@ choice of partners.
 Built With:
 -----------
 
-Ruby on Rails — Our back end API is a Rails app.
-SQLite — Our main data store is in SQLite. 
-jquery-rails plus other Ruby Gems, a complete list of which is at /master/Gemfile.
+-Ruby on Rails — Our back end API is a Rails app.
+
+-SQLite — Our main data store is in SQLite. 
+
+-jquery-rails plus other Ruby Gems, a complete list of which is at /master/Gemfile.
 
 Setup Instructions:
 -------------------
 
 -Clone de github repo
+
 -cd into the new directory, bundle install, and start the web server with rails s
+
 -http://localhost:3000
+
 -email: CoorA@gmail.com / password: coordinadora
 
 
@@ -55,4 +60,5 @@ Contacts:
 ---------
 
 Juan José Rodriguez: juanrodriguezspain@gmail.com
+
 Iván Gómez: ivan@lcc.uma.es
