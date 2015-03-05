@@ -43,6 +43,7 @@ Setup Instructions:
 
 -Clone de github repo
 -cd into the new directory, bundle install, and start the web server with rails s
+
 -http://localhost:3000
 -email: CoorA@gmail.com
 -password: coordinadora
@@ -52,4 +53,5 @@ Contacts:
 ---------
 
 Juan José Rodriguez: juanrodriguezspain@gmail.com
+
 Iván Gómez: ivan@lcc.uma.es
