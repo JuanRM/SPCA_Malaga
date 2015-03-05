@@ -23,12 +23,12 @@ contained in:
 assigned: Cleaners, Veterinarians, Coordinators, Volunteers and 
 Administrator.
 
--Follow of animals in foster care regimen.
+-Monitoring of animals in foster care regimen.
 
 -Creation of relationships between animals to facilitate the 
 choice of partners.
 
--System Distributed allowing the choice and allocation of shifts.
+-Distributed Systems allowing the choice and allocation of shifts.
 
 -Management And monitoring tasks assigned to each zone.
 
