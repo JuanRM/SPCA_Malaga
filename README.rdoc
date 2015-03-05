@@ -7,6 +7,7 @@ The application is responsible for easy monitoring and management
 of the areas, personal, profiles, schedules, shifts, tasks, reports and relevant information about the animals.
 
 
+
 Features:
 ---------
 
@@ -35,6 +36,7 @@ choice of partners.
 
 
 
+
 Built With:
 -----------
 
@@ -45,6 +47,7 @@ Built With:
 -jquery-rails plus other Ruby Gems, a complete list of which is at /master/Gemfile.
 
 Ruby on Rails
+
 
 Setup Instructions:
 -------------------
