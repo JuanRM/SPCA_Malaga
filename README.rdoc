@@ -1,7 +1,7 @@
 SPCA_MÁLAGA:
 ------------
 
-SPCA_Málaga is a Web Application designed to meet the needs or easy tracking information and internal management of the Animal Protection Society of Málaga, being easily adaptable to the mode of operating of most animal shelters.
+SPCA_Málaga is a Web Application designed to meet the needs of easy tracking information and internal management of the Animal Protection Society of Málaga, being easily adaptable to the mode of operating of most animal shelters.
 
 The application is responsible for easy monitoring and management 
 of the areas, personal, profiles, schedules, shifts, tasks, reports and relevant information about the animals.
