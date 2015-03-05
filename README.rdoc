@@ -15,7 +15,7 @@ FEATURES:
 -Consultation and management of current status and the information 
 contained in:
 
-    Zones: Real division areas.
+    Departments: Real division areas.
     Kennels: Shared by animals, capacity control.
     Animals: sex, race, species, observations ..
 
