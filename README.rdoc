@@ -44,6 +44,8 @@ Built With:
 
 -jquery-rails plus other Ruby Gems, a complete list of which is at /master/Gemfile.
 
+Ruby on Rails
+
 Setup Instructions:
 -------------------
 
