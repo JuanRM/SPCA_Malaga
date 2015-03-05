@@ -1,4 +1,4 @@
-SPCA_Málaga:
+SPCA_MÁLAGA:
 ------------
 
 SPCA_Málaga is a Web Application designed to meet the needs or easy tracking information and internal management of the Animal Protection Society of Málaga, being easily adaptable to the mode of operating of most animal shelters.
@@ -8,7 +8,7 @@ of the areas, personal, profiles, schedules, shifts, tasks, reports and relevant
 
 
 
-Features:
+FEATURES:
 ---------
 
 
@@ -37,7 +37,7 @@ choice of partners.
 
 
 
-Built With:
+BUILT WITCH:
 -----------
 
 -Ruby on Rails — Our back end API is a Rails app.
@@ -49,7 +49,7 @@ Built With:
 Ruby on Rails
 
 
-Setup Instructions:
+SETUP INSTRUCTIONS:
 -------------------
 
 -Clone de github repo
@@ -61,7 +61,7 @@ Setup Instructions:
 -email: CoorA@gmail.com / password: coordinadora
 
 
-Contacts:
+CONTACTS:
 ---------
 
 Juan José Rodriguez: juanrodriguezspain@gmail.com
